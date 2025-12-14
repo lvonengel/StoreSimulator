@@ -81,6 +81,11 @@ MonoBehaviour:
   - {fileID: 3998202325168100544}
   - {fileID: 4576252725891003026}
   - {fileID: 9184965316174446212}
+  furnitureMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  placingModel: {fileID: 507393603158235633}
+  gridSize: 0.25
 --- !u!114 &4805489196260975191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,6 +108,11 @@ MonoBehaviour:
   - {fileID: 1995780842249695812}
   - {fileID: 7905324177355020735}
   - {fileID: 1401718772232794247}
+  furnitureMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  placingModel: {fileID: 507393603158235633}
+  gridSize: 0.25
 --- !u!1 &4130085352077556750
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,12 +237,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7959129163343032292}
-  - {fileID: 3882977662528074487}
   - {fileID: 916833157180776092}
+  - {fileID: 3882977662528074487}
   - {fileID: 8844529294870869351}
   - {fileID: 322193431310064735}
-  - {fileID: 4539769950711349688}
   - {fileID: 2339401379028989976}
+  - {fileID: 4539769950711349688}
   - {fileID: 2920957538310069834}
   - {fileID: 7529107865840226908}
   m_Father: {fileID: 4588628916885426227}
@@ -455,7 +465,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3673085984818720570, guid: c3ee19cb9b4c0cb44ba526e6af778ad8, type: 3}
       propertyPath: m_Name
-      value: Shelf Space (4)
+      value: Shelf Space (5)
       objectReference: {fileID: 0}
     - target: {fileID: 9144016110041716015, guid: c3ee19cb9b4c0cb44ba526e6af778ad8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -528,7 +538,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3673085984818720570, guid: c3ee19cb9b4c0cb44ba526e6af778ad8, type: 3}
       propertyPath: m_Name
-      value: Shelf Space
+      value: Shelf Space (1)
       objectReference: {fileID: 0}
     - target: {fileID: 9144016110041716015, guid: c3ee19cb9b4c0cb44ba526e6af778ad8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -725,6 +735,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7014d71b0504a0746995f868cce613b0, type: 3}
+--- !u!1 &507393603158235633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6610996445308848919, guid: 7014d71b0504a0746995f868cce613b0, type: 3}
+  m_PrefabInstance: {fileID: 6680076257680184038}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3038920617693281592 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8545597635304337374, guid: 7014d71b0504a0746995f868cce613b0, type: 3}
@@ -740,7 +755,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3673085984818720570, guid: c3ee19cb9b4c0cb44ba526e6af778ad8, type: 3}
       propertyPath: m_Name
-      value: Shelf Space (5)
+      value: Shelf Space (4)
       objectReference: {fileID: 0}
     - target: {fileID: 9144016110041716015, guid: c3ee19cb9b4c0cb44ba526e6af778ad8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -813,7 +828,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3673085984818720570, guid: c3ee19cb9b4c0cb44ba526e6af778ad8, type: 3}
       propertyPath: m_Name
-      value: Shelf Space (1)
+      value: Shelf Space
       objectReference: {fileID: 0}
     - target: {fileID: 9144016110041716015, guid: c3ee19cb9b4c0cb44ba526e6af778ad8, type: 3}
       propertyPath: m_LocalPosition.x

@@ -185,11 +185,10 @@ public class PlayerController : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, interactionRange, whatIsFurniture)) {
                     heldFurniture = hit.transform.GetComponent<FurnitureController>();
 
-                    heldFurniture.transform.SetParent(furniturePoint);
-                    heldFurniture.transform.localPosition = Vector3.zero;
-                    heldFurniture.transform.localRotation = Quaternion.identity;
+                    heldFurniture.transform.SetParent(null, true);
 
                     heldFurniture.MakePlaceable();
+                    heldFurniture.SetPlacementPosition(heldFurniture.transform.position);
 
                     if (AudioManager.instance != null) {
                         AudioManager.instance.PlaySFX(4);
@@ -287,21 +286,47 @@ public class PlayerController : MonoBehaviour {
             }
 
             if (heldFurniture != null) {
-                heldFurniture.transform.position = new Vector3(furniturePoint.position.x, 0f, furniturePoint.position.z);
-                heldFurniture.transform.LookAt(new Vector3(transform.position.x, 0f, transform.position.z));
 
-                if (Mouse.current.leftButton.wasPressedThisFrame || Keyboard.current.rKey.wasPressedThisFrame) {
-                    heldFurniture.transform.SetParent(null);
+                // --- GRID-SNAPPED POSITION (Y LOCKED INSIDE) ---
+                Vector3 targetPos = furniturePoint.position;
+                heldFurniture.SetPlacementPosition(targetPos);
 
-                    heldFurniture.PlaceFurniture();
+                // --- ROTATION (30° steps via scroll) ---
+                float scroll = Mouse.current.scroll.ReadValue().y;
+                if (scroll > 0f) {
+                    heldFurniture.RotatePlacement(1);
+                }
+                else if (scroll < 0f) {
+                    heldFurniture.RotatePlacement(-1);
+                }
 
-                    heldFurniture = null;
+                // --- OVERLAP CHECK ---
+                bool overlapping = heldFurniture.IsFurnitureOverlapping();
+
+                if (overlapping) {
+                    heldFurniture.setColorRed();
+                } else {
+                    heldFurniture.setColorGreen();
+                }
+
+                // --- PLACE ---
+                if (Mouse.current.leftButton.wasPressedThisFrame ||
+                    Keyboard.current.rKey.wasPressedThisFrame) {
+
+                    if (!overlapping) {
+                        heldFurniture.transform.SetParent(null);
+                        heldFurniture.PlaceFurniture();
+                        heldFurniture = null;
+                    }
 
                     if (AudioManager.instance != null) {
                         AudioManager.instance.PlaySFX(5);
                     }
                 }
             }
+
         }
     }
+    
+    
 }
