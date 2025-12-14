@@ -5,11 +5,12 @@ using UnityEngine;
 /// Manages the price label UI for a shelf space.
 /// </summary>
 public class StockInfoController : MonoBehaviour {
+    public static StockInfoController instance;
     public List<StockInfo> foodInfo, produceInfo;
 
     public List<StockInfo> allStock = new List<StockInfo>();
 
-    public static StockInfoController instance;
+    
 
     private void Awake() {
         instance = this;

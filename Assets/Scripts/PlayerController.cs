@@ -77,6 +77,11 @@ public class PlayerController : MonoBehaviour {
                 return;
             }
         }
+        if (UIController.instance.phoneScreen != null) {
+            if (UIController.instance.phoneScreen.activeSelf == true) {
+                return;
+            }
+        }
 
         Vector2 lookinput = lookAction.action.ReadValue<Vector2>();
 

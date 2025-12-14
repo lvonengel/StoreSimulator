@@ -14,23 +14,20 @@ public class BuyStockFrameController : MonoBehaviour {
 
     private float boxCost;
 
-    private void Start() {
-        UpdateFrameInfo();
-    }
-
     /// <summary>
     /// Creates the information for each item.
     /// </summary>
-    public void UpdateFrameInfo() {
-        info = StockInfoController.instance.GetInfo(info.name);
+    public void UpdateFrameInfo(StockInfo food) {
+        info = food;
+        // info = StockInfoController.instance.GetInfo(info.name);
 
-        nameText.text = info.name;
-        priceText.text = "$" + info.price.ToString("F2");
+        nameText.text = food.name;
+        priceText.text = "$" + food.price.ToString("F2");
 
-        int boxAmount = boxToSpawn.GetStockAmount(info.typeOfStock);
+        int boxAmount = boxToSpawn.GetStockAmount(food.typeOfStock);
         amountInBoxText.text = boxAmount.ToString() + " per box";
 
-        boxCost = boxAmount * info.price;
+        boxCost = boxAmount * food.price;
         boxPriceText.text = "Box: $" + boxCost.ToString("F2");
 
         buttonText.text = "PAY: $" + boxCost.ToString("F2");

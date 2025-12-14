@@ -74,6 +74,7 @@ MonoBehaviour:
   mainObject: {fileID: 8492101247078041551}
   placingObject: {fileID: 4130085352077556750}
   col: {fileID: 8676032891953030701}
+  furnitureName: Double Sided Shelving Case - 1 x 4
   price: 500
   standPoint: {fileID: 2179632205363466525}
   shelves:
@@ -101,6 +102,7 @@ MonoBehaviour:
   mainObject: {fileID: 8492101247078041551}
   placingObject: {fileID: 4130085352077556750}
   col: {fileID: 8676032891953030701}
+  furnitureName: 
   price: 500
   standPoint: {fileID: 48716751251532601}
   shelves:

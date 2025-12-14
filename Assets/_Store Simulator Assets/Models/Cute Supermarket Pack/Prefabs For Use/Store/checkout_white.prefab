@@ -61,6 +61,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +84,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -150,6 +153,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -172,6 +177,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -232,15 +238,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2795670291487225341, guid: 5fdbfa86b387a0445b99c5195f6d3ac1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.91309536
       objectReference: {fileID: 0}
     - target: {fileID: 2795670291487225341, guid: 5fdbfa86b387a0445b99c5195f6d3ac1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2795670291487225341, guid: 5fdbfa86b387a0445b99c5195f6d3ac1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.407746
       objectReference: {fileID: 0}
     - target: {fileID: 2795670291487225341, guid: 5fdbfa86b387a0445b99c5195f6d3ac1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -252,7 +258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2795670291487225341, guid: 5fdbfa86b387a0445b99c5195f6d3ac1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 48.127
       objectReference: {fileID: 0}
     - target: {fileID: 2795670291487225341, guid: 5fdbfa86b387a0445b99c5195f6d3ac1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

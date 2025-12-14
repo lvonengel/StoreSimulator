@@ -24,18 +24,50 @@ public class UIController : MonoBehaviour {
     public string mainMenuScene;
 
     public GameObject pauseScreen;
+    public GameObject phoneScreen;
+
+    [SerializeField] private Transform stockTemplate;
+    [SerializeField] private Transform stockTemplateContainer;
+    [SerializeField] private Transform furnitureTemplate;
+    [SerializeField] private Transform furnitureTemplateContainer;
 
     private void Awake() {
         instance = this;
+        CreateStockTemplates();
+        CreateFurnitureTemplates();
     }
 
     private void Update() {
         if (Keyboard.current.tabKey.wasPressedThisFrame) {
-            OpenCloseBuyMenu();
+            OpenClosePhone();
         }
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame) {
             PauseUnpause();
+        }
+    }
+
+    private void CreateStockTemplates() {
+        foreach (Transform child in stockTemplateContainer) {
+            if (child == stockTemplate) continue;
+            Destroy(child.gameObject);
+        }
+        foreach (StockInfo food in StockInfoController.instance.allStock) {
+            Transform stockTransform = Instantiate(stockTemplate, stockTemplateContainer);
+            stockTransform.gameObject.SetActive(true);
+            stockTransform.GetComponent<BuyStockFrameController>().UpdateFrameInfo(food);
+        }
+    }
+
+    private void CreateFurnitureTemplates() {
+        foreach (Transform child in furnitureTemplateContainer) {
+            if (child == furnitureTemplate) continue;
+            Destroy(child.gameObject);
+        }
+        foreach (FurnitureInfo furniture in FurnitureInfoController.instance.furnitureInfo) {
+            Transform furnitureTransform = Instantiate(furnitureTemplate, furnitureTemplateContainer);
+            furnitureTransform.gameObject.SetActive(true);
+            furnitureTransform.GetComponent<BuyFurnitureFrameController>().UpdateFrameInfo(furniture);
         }
     }
 
@@ -71,14 +103,27 @@ public class UIController : MonoBehaviour {
         moneyText.text = "$" + currentMoney.ToString("F2");
     }
 
+    public void OpenClosePhone() {
+        if (phoneScreen.activeSelf == false) {
+            phoneScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        } else {
+            phoneScreen.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            CloseAllPhoneApps();
+            
+        }
+    }
     public void OpenCloseBuyMenu() {
         if (buyMenuScreen.activeSelf == false) {
             buyMenuScreen.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
         } else {
             buyMenuScreen.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    public void CloseAllPhoneApps() {
+        buyMenuScreen.SetActive(false);
     }
 
     public void MainMenu() {
