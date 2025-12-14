@@ -66,8 +66,13 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (UIController.instance.buyMenuScreen != null) {
-            if (UIController.instance.buyMenuScreen.activeSelf == true) {
+        if (UIController.instance.buyStockScreen != null) {
+            if (UIController.instance.buyStockScreen.activeSelf == true) {
+                return;
+            }
+        }
+        if (UIController.instance.buyFurnitureScreen != null) {
+            if (UIController.instance.buyFurnitureScreen.activeSelf == true) {
                 return;
             }
         }

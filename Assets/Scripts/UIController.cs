@@ -19,7 +19,8 @@ public class UIController : MonoBehaviour {
 
     public TMP_Text moneyText;
 
-    public GameObject buyMenuScreen;
+    public GameObject buyStockScreen;
+    public GameObject buyFurnitureScreen;
 
     public string mainMenuScene;
 
@@ -114,16 +115,24 @@ public class UIController : MonoBehaviour {
             
         }
     }
-    public void OpenCloseBuyMenu() {
-        if (buyMenuScreen.activeSelf == false) {
-            buyMenuScreen.SetActive(true);
+    public void OpenCloseBuyStockScreen() {
+        if (buyStockScreen.activeSelf == false) {
+            buyStockScreen.SetActive(true);
         } else {
-            buyMenuScreen.SetActive(false);
+            buyStockScreen.SetActive(false);
+        }
+    }
+    public void OpenCloseBuyFurnitureScreen() {
+        if (buyFurnitureScreen.activeSelf == false) {
+            buyFurnitureScreen.SetActive(true);
+        } else {
+            buyFurnitureScreen.SetActive(false);
         }
     }
 
     public void CloseAllPhoneApps() {
-        buyMenuScreen.SetActive(false);
+        buyStockScreen.SetActive(false);
+        buyFurnitureScreen.SetActive(false);
     }
 
     public void MainMenu() {
