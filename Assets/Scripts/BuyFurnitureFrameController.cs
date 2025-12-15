@@ -15,6 +15,12 @@ public class BuyFurnitureFrameController : MonoBehaviour {
 
     [SerializeField] private Button buyButton;
 
+    private void Awake() {
+        buyButton.onClick.AddListener(() => {
+            BuyFurniture();
+        });
+    }
+
     public void UpdateFrameInfo(FurnitureInfo furniture) {
         this.furniture = furniture;
         // info = StockInfoController.instance.GetInfo(info.name);

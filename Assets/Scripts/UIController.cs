@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Controls all UI including the price panel, buy screen, and pause screen.
@@ -11,99 +10,28 @@ public class UIController : MonoBehaviour {
 
     public GameObject updatePricePanel;
 
-    [SerializeField] private TMP_Text basePriceText, currentPriceText;
-
-    [SerializeField] private TMP_InputField priceInputfield;
-
-    [SerializeField] private StockInfo activeStockInfo;
-
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private TMP_Text storeLevelText;
 
     public GameObject buyStockScreen;
     public GameObject buyFurnitureScreen;
 
-    [SerializeField] private string mainMenuScene;
-
     public GameObject pauseScreen;
     public GameObject phoneScreen;
 
-    [SerializeField] private Transform stockTemplate;
-    [SerializeField] private Transform stockTemplateContainer;
-    [SerializeField] private Transform furnitureTemplate;
-    [SerializeField] private Transform furnitureTemplateContainer;
 
     private void Awake() {
         instance = this;
-        stockTemplate.gameObject.SetActive(false);
-        furnitureTemplate.gameObject.SetActive(false);
     }
 
-    private void Start() {
-        CreateStockTemplates();
-        CreateFurnitureTemplates();
-    }
 
     private void Update() {
         if (Keyboard.current.tabKey.wasPressedThisFrame) {
             OpenClosePhone();
         }
-
         if (Keyboard.current.escapeKey.wasPressedThisFrame) {
             PauseUnpause();
         }
-    }
-
-    private void CreateStockTemplates() {
-        foreach (Transform child in stockTemplateContainer) {
-            if (child == stockTemplate) continue;
-            Destroy(child.gameObject);
-        }
-        foreach (StockInfo food in StockInfoController.instance.allStock) {
-            Transform stockTransform = Instantiate(stockTemplate, stockTemplateContainer);
-            stockTransform.gameObject.SetActive(true);
-            stockTransform.GetComponent<BuyStockFrameController>().UpdateFrameInfo(food);
-        }
-    }
-
-    private void CreateFurnitureTemplates() {
-        foreach (Transform child in furnitureTemplateContainer) {
-            if (child == furnitureTemplate) continue;
-            Destroy(child.gameObject);
-        }
-        foreach (FurnitureInfo furniture in FurnitureInfoController.instance.furnitureInfo) {
-            Transform furnitureTransform = Instantiate(furnitureTemplate, furnitureTemplateContainer);
-            furnitureTransform.gameObject.SetActive(true);
-            furnitureTransform.GetComponent<BuyFurnitureFrameController>().UpdateFrameInfo(furniture);
-        }
-    }
-
-    public void OpenUpdatePrice(StockInfo stockToUpdate) {
-        updatePricePanel.SetActive(true);
-
-        Cursor.lockState = CursorLockMode.None;
-
-        basePriceText.text = "$" + stockToUpdate.price.ToString("F2");
-        currentPriceText.text = "$" + stockToUpdate.currentPrice.ToString("F2");
-
-        activeStockInfo = stockToUpdate;
-
-        priceInputfield.text = stockToUpdate.currentPrice.ToString();
-    }
-
-    public void CloseUpdatePrice() {
-        updatePricePanel.SetActive(false);
-
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    public void ApplyPriceUpdate() {
-        activeStockInfo.currentPrice = float.Parse(priceInputfield.text);
-        currentPriceText.text = "$" + activeStockInfo.currentPrice.ToString("F2");
-
-        StockInfoController.instance.UpdatePrice(activeStockInfo.name, activeStockInfo.currentPrice);
-
-        CloseUpdatePrice();
     }
 
     public void UpdateMoney(float currentMoney) {
@@ -113,6 +41,11 @@ public class UIController : MonoBehaviour {
         storeLevelText.text = "Store Level: " + storeLevel.ToString();
     }
 
+    public void OpenUpdatePrice(StockInfo stockToUpdate) {
+        updatePricePanel.gameObject.SetActive(true);
+        UpdatePricePanelUI.instance.LoadUpdatePrice(stockToUpdate);
+    }
+
     public void OpenClosePhone() {
         if (phoneScreen.activeSelf == false) {
             phoneScreen.SetActive(true);
@@ -120,37 +53,8 @@ public class UIController : MonoBehaviour {
         } else {
             phoneScreen.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
-            CloseAllPhoneApps();
-            
+            PhoneScreenUI.instance.CloseAllPhoneApps(); 
         }
-    }
-    public void OpenCloseBuyStockScreen() {
-        if (buyStockScreen.activeSelf == false) {
-            buyStockScreen.SetActive(true);
-        } else {
-            buyStockScreen.SetActive(false);
-        }
-    }
-    public void OpenCloseBuyFurnitureScreen() {
-        if (buyFurnitureScreen.activeSelf == false) {
-            buyFurnitureScreen.SetActive(true);
-        } else {
-            buyFurnitureScreen.SetActive(false);
-        }
-    }
-
-    public void CloseAllPhoneApps() {
-        buyStockScreen.SetActive(false);
-        buyFurnitureScreen.SetActive(false);
-    }
-
-    public void MainMenu() {
-        SceneManager.LoadScene(mainMenuScene);
-        Time.timeScale = 1f;
-    }
-
-    public void QuitGame() {
-        Application.Quit();
     }
 
     public void PauseUnpause() {
@@ -165,4 +69,5 @@ public class UIController : MonoBehaviour {
             Time.timeScale = 1f;
         }
     }
+
 }

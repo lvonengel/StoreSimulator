@@ -20,6 +20,12 @@ public class BuyStockFrameController : MonoBehaviour {
 
     private float boxCost;
 
+    private void Awake() {
+        buyButton.onClick.AddListener(() => {
+            BuyBox();
+        });
+    }
+
     /// <summary>
     /// Creates the information for each item.
     /// </summary>
