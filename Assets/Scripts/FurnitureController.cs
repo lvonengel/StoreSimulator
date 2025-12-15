@@ -5,19 +5,17 @@ using UnityEngine;
 /// Manages each individual piece of furniture.
 /// </summary>
 public class FurnitureController : MonoBehaviour {
-    public GameObject mainObject, placingObject;
-    public Collider col;
-
-    public float price;
+    [SerializeField] private GameObject mainObject, placingObject;
+    [SerializeField] private Collider col;
 
     public Transform standPoint;
 
     public List<ShelfSpaceController> shelves;
     [SerializeField] private LayerMask furnitureMask;
-    public GameObject placingModel;
+    [SerializeField] private GameObject placingModel;
     private float rotationStep = 45f;
     private float currentRotationY;
-    public float gridSize = .25f;
+    [SerializeField] private float gridSize = .25f;
 
 
     private void Start() {

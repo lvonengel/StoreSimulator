@@ -6,12 +6,12 @@ using UnityEngine;
 public class StockObject : MonoBehaviour {
     public StockInfo info;
 
-    public float moveSpeed;
+    [SerializeField] private float moveSpeed;
 
     public bool isPlaced;
 
     public Rigidbody theRB;
-    public Collider col;
+    [SerializeField] private Collider col;
 
     private bool inBag;
 

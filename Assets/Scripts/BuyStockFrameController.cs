@@ -1,16 +1,22 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Thi controls the UI for buying stock in the game. This
 /// creates each frame with the data for the item.
 /// </summary>
 public class BuyStockFrameController : MonoBehaviour {
-    public StockInfo info;
+    [SerializeField] private StockInfo info;
 
-    public TMP_Text nameText, priceText, amountInBoxText, boxPriceText, buttonText;
+    [SerializeField] private TMP_Text nameText, priceText, amountInBoxText, boxPriceText, buttonText;
+    [SerializeField] private GameObject underleveledScreen;
+    [SerializeField] private TMP_Text underleveledText;
 
-    public StockBoxController boxToSpawn;
+    [SerializeField] private Button buyButton;
+
+
+    [SerializeField] private StockBoxController boxToSpawn;
 
     private float boxCost;
 
@@ -30,7 +36,15 @@ public class BuyStockFrameController : MonoBehaviour {
         boxCost = boxAmount * food.price;
         boxPriceText.text = "Box: $" + boxCost.ToString("F2");
 
-        buttonText.text = "PAY: $" + boxCost.ToString("F2");
+        if (CanBuy(food)) {
+            buyButton.gameObject.SetActive(true);
+            buttonText.text = "PAY: $" + boxCost.ToString("F2");
+            underleveledScreen.SetActive(false);
+        } else {
+            buyButton.gameObject.SetActive(false);
+            underleveledScreen.SetActive(true);
+            underleveledText.text = "MUST BE LV " + food.requiredStoreLevel;
+        }
     }
 
     /// <summary>
@@ -41,5 +55,12 @@ public class BuyStockFrameController : MonoBehaviour {
             StoreController.instance.SpendMoney(boxCost);
             Instantiate(boxToSpawn, StoreController.instance.stockSpawnPoint.position, Quaternion.identity).SetupBox(info);
         }
+    }
+
+    public bool CanBuy(StockInfo food) {
+        if (food.requiredStoreLevel < StoreController.instance.GetStoreLevel()) {
+            return true;
+        }
+        return false;
     }
 }

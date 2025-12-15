@@ -8,6 +8,8 @@ using UnityEngine;
 public class FurnitureInfo {
     public string name;
 
+    public int requiredStoreLevel;
+
     public enum StockType {
         cereal, bigDrink, chipsTube, fruit, fruitLarge
     }

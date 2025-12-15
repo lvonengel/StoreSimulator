@@ -9,12 +9,12 @@ using UnityEngine;
 public class Checkout : MonoBehaviour {
     public static Checkout instance;
     
-    public TMP_Text priceText;
-    public GameObject checkoutScreen;
+    [SerializeField] private TMP_Text priceText;
+    [SerializeField] private GameObject checkoutScreen;
 
-    public Transform queuePoint;
+    [SerializeField] private Transform queuePoint;
 
-    public List<Customer> customersInQueue = new List<Customer>();
+    [SerializeField] private List<Customer> customersInQueue = new List<Customer>();
 
     private void Awake() {
         instance = this;

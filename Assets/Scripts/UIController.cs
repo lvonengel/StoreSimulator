@@ -11,18 +11,19 @@ public class UIController : MonoBehaviour {
 
     public GameObject updatePricePanel;
 
-    public TMP_Text basePriceText, currentPriceText;
+    [SerializeField] private TMP_Text basePriceText, currentPriceText;
 
-    public TMP_InputField priceInputfield;
+    [SerializeField] private TMP_InputField priceInputfield;
 
-    private StockInfo activeStockInfo;
+    [SerializeField] private StockInfo activeStockInfo;
 
-    public TMP_Text moneyText;
+    [SerializeField] private TMP_Text moneyText;
+    [SerializeField] private TMP_Text storeLevelText;
 
     public GameObject buyStockScreen;
     public GameObject buyFurnitureScreen;
 
-    public string mainMenuScene;
+    [SerializeField] private string mainMenuScene;
 
     public GameObject pauseScreen;
     public GameObject phoneScreen;
@@ -34,6 +35,11 @@ public class UIController : MonoBehaviour {
 
     private void Awake() {
         instance = this;
+        stockTemplate.gameObject.SetActive(false);
+        furnitureTemplate.gameObject.SetActive(false);
+    }
+
+    private void Start() {
         CreateStockTemplates();
         CreateFurnitureTemplates();
     }
@@ -102,6 +108,9 @@ public class UIController : MonoBehaviour {
 
     public void UpdateMoney(float currentMoney) {
         moneyText.text = "$" + currentMoney.ToString("F2");
+    }
+    public void UpdateStoreLevel(int storeLevel) {
+        storeLevelText.text = "Store Level: " + storeLevel.ToString();
     }
 
     public void OpenClosePhone() {

@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class StockInfoController : MonoBehaviour {
     public static StockInfoController instance;
-    public List<StockInfo> foodInfo, produceInfo;
+    [SerializeField] private List<StockInfo> foodInfo, produceInfo;
 
     public List<StockInfo> allStock = new List<StockInfo>();
 

@@ -5,15 +5,13 @@ using UnityEngine;
 /// This controls switching the two tabs.
 /// </summary>
 public class BuyMenuController : MonoBehaviour {
-    public GameObject stockPanel, furniturePanel;
+    [SerializeField] private GameObject stockPanel;
 
     public void OpenStockPanel() {
         stockPanel.SetActive(true);
-        furniturePanel.SetActive(false);
     }
 
     public void OpenFurniturePanel() {
         stockPanel.SetActive(false);
-        furniturePanel.SetActive(true);
     }
 }

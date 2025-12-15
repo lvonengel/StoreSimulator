@@ -9,7 +9,8 @@ using UnityEngine.InputSystem;
 public class StoreController : MonoBehaviour {
     public static StoreController instance;
 
-    public float currentMoney = 1000f;
+    [SerializeField] private float currentMoney = 1000f;
+    private int storeLevel = 1;
 
     public Transform stockSpawnPoint, furnitureSpawnPoint;
 
@@ -21,6 +22,7 @@ public class StoreController : MonoBehaviour {
 
     private void Start() {
         UIController.instance.UpdateMoney(currentMoney);
+        UIController.instance.UpdateStoreLevel(storeLevel);
         // AudioManager.instance.StartBGM();
     }
 
@@ -60,4 +62,9 @@ public class StoreController : MonoBehaviour {
 
         return hasEnough;
     }
+
+    public int GetStoreLevel() {
+        return storeLevel;
+    }
+    
 }

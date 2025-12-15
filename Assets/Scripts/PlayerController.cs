@@ -8,50 +8,48 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour {
 
     // Movement
-    public InputActionReference moveAction;
+    [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference jumpAction;
+    [SerializeField] private InputActionReference lookAction;
+    [SerializeField] private Camera theCam;
 
-    public CharacterController charCon;
+    [SerializeField] private CharacterController charCon;
 
-    public float moveSpeed;
-
-    private float ySpeed;
-
-    public InputActionReference jumpAction;
-    public float jumpForce;
-
-    public InputActionReference lookAction;
-    private float horiRot, vertRot;
-    public float lookSpeed;
-    public Camera theCam;
-    public float minLookAngle, maxLookAngle;
-
-    public float interactionRange;
-
-    public float throwForce;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float ySpeed;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float horiRot, vertRot;
+    [SerializeField] private float lookSpeed;
+    
+    [SerializeField] private float minLookAngle, maxLookAngle;
+    [SerializeField] private float interactionRange;
+    [SerializeField] private float throwForce;
+    [SerializeField] private StockBoxController heldBox;
+    [SerializeField] private FurnitureController heldFurniture;
 
     // Layers
-    public LayerMask whatIsStock;
+    [SerializeField] private LayerMask whatIsStock;
 
-    public LayerMask whatIsShelf;
+    [SerializeField] private LayerMask whatIsShelf;
 
-    public LayerMask whatIsStockBox;
-    public LayerMask whatIsBin;
+    [SerializeField] private LayerMask whatIsStockBox;
+    [SerializeField] private LayerMask whatIsBin;
 
-    public LayerMask whatIsFurniture;
-    public LayerMask whatIsCheckout;
+    [SerializeField] private LayerMask whatIsFurniture;
+    [SerializeField] private LayerMask whatIsCheckout;
 
     // Hold points and stock
     private StockObject heldPickup;
-    public Transform holdPoint;
-    public StockBoxController heldBox;
-    public Transform boxHoldPoint;
+    [SerializeField] private Transform holdPoint;
 
-    public float waitToPlaceStock;
+    [SerializeField] private Transform boxHoldPoint;
+
+    [SerializeField] private float waitToPlaceStock;
     private float placeStockCounter;
 
 
-    public Transform furniturePoint;
-    public FurnitureController heldFurniture;
+    [SerializeField] private Transform furniturePoint;
+    
 
     
 

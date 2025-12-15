@@ -8,12 +8,12 @@ using UnityEngine;
 public class ShelfSpaceController : MonoBehaviour {
     public StockInfo info;
 
-    public List<StockObject> objectsOnShelf;
+    [SerializeField] private List<StockObject> objectsOnShelf;
 
-    public List<Transform> bigDrinkPoints;
-    public List<Transform> cerealPoints, tubeChipsPoints, fruitPoints, largeFruitPoints;
+    [SerializeField] private List<Transform> bigDrinkPoints;
+    [SerializeField] private List<Transform> cerealPoints, tubeChipsPoints, fruitPoints, largeFruitPoints;
 
-    public TMP_Text shelfLabel;
+    [SerializeField] private TMP_Text shelfLabel;
 
     public void PlaceStock(StockObject objectToPlace) {
         bool preventPlacing = true;

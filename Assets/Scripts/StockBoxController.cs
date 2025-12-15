@@ -7,19 +7,19 @@ using UnityEngine;
 public class StockBoxController : MonoBehaviour {
     public StockInfo info; 
 
-    public List<Transform> bigDrinkPoints;
-    public List<Transform> cerealPoints, tubeChipsPoints, fruitPoints, largeFruitPoints;
+    [SerializeField] private List<Transform> bigDrinkPoints;
+    [SerializeField] private List<Transform> cerealPoints, tubeChipsPoints, fruitPoints, largeFruitPoints;
 
     public List<StockObject> stockInBox;
 
-    public bool testFill;
+    [SerializeField] private bool testFill;
 
     public Rigidbody theRB;
-    public Collider col;
+    [SerializeField] private Collider col;
 
     private bool isHeld;
 
-    public float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 5f;
 
     public GameObject flap1, flap2;
 

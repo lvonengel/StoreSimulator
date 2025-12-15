@@ -6,26 +6,26 @@ using UnityEngine;
 /// move speed, and grabbing an item.
 /// </summary>
 public class Customer : MonoBehaviour {
-    public List<NavPoint> points = new List<NavPoint>();
+    [SerializeField] private List<NavPoint> points = new List<NavPoint>();
 
-    public float moveSpeed;
+    [SerializeField] private float moveSpeed;
     private float currentWaitTime;
 
-    public Animator anim;
+    [SerializeField] private Animator anim;
 
     public enum CustomerState { entering, browsing, queuing, atCheckout, leaving }
-    public CustomerState currentState;
+    [SerializeField] private CustomerState currentState;
 
-    public int maxBrowsePoints = 5;
+    [SerializeField] private int maxBrowsePoints = 5;
     private int browsePointsRemain;
 
-    public float browseTime;
+    [SerializeField] private float browseTime;
 
-    public FurnitureController currentShelfCase;
+    [SerializeField] private FurnitureController currentShelfCase;
 
-    public GameObject shoppingBag;
+    [SerializeField] private GameObject shoppingBag;
     private bool hasGrabbed;
-    public float waitAfterGrabbing = .5f;
+    [SerializeField] private float waitAfterGrabbing = .5f;
 
     private List<StockObject> stockInBag = new List<StockObject>();
 

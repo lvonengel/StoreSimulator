@@ -7,6 +7,7 @@ using UnityEngine;
 public class StockInfo
 {
     public string name;
+    public int requiredStoreLevel;
 
     public enum StockType {
         cereal, bigDrink, chipsTube, fruit, fruitLarge

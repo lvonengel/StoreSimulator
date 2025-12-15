@@ -7,12 +7,12 @@ using UnityEngine;
 public class CustomerManager : MonoBehaviour {
     public static CustomerManager instance;
 
-    public List<Customer> customersToSpawn = new List<Customer>();
+    [SerializeField] private List<Customer> customersToSpawn = new List<Customer>();
 
-    public float timeBetweenCustomers;
+    [SerializeField] private float timeBetweenCustomers;
     private float spawnCounter;
 
-    public List<NavPoint> entryPointsLeft, entryPointsRight;
+    [SerializeField] private List<NavPoint> entryPointsLeft, entryPointsRight;
 
     private void Awake() {
         instance = this;
