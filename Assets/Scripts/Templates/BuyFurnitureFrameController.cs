@@ -14,6 +14,7 @@ public class BuyFurnitureFrameController : MonoBehaviour {
     [SerializeField] private TMP_Text underleveledText;
 
     [SerializeField] private Button buyButton;
+    [SerializeField] private Image furnitureImage;
 
     private void Awake() {
         buyButton.onClick.AddListener(() => {

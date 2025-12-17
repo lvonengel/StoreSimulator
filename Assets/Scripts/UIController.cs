@@ -1,17 +1,19 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// <summary>
 /// Controls all UI including the price panel, buy screen, and pause screen.
 /// </summary>
 public class UIController : MonoBehaviour {
-    public static UIController instance;
+    public static UIController instance {get; private set;}
 
     public GameObject updatePricePanel;
 
     [SerializeField] private TMP_Text moneyText;
     [SerializeField] private TMP_Text storeLevelText;
+    [SerializeField] private Button closeFurnitureScreenButton;
 
     public GameObject buyStockScreen;
     public GameObject buyFurnitureScreen;
@@ -22,6 +24,9 @@ public class UIController : MonoBehaviour {
 
     private void Awake() {
         instance = this;
+        closeFurnitureScreenButton.onClick.AddListener(() => {
+            buyFurnitureScreen.SetActive(false);
+        });
     }
 
 

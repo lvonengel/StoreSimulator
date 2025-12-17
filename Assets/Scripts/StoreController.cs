@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 /// Controls the money system in the game.
 /// </summary>
 public class StoreController : MonoBehaviour {
-    public static StoreController instance;
+    public static StoreController instance {get; private set;}
 
     [SerializeField] private float currentMoney = 1000f;
     private int storeLevel = 1;

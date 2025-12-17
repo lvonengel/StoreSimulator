@@ -14,15 +14,16 @@ public class BuyStockFrameController : MonoBehaviour {
     [SerializeField] private TMP_Text underleveledText;
 
     [SerializeField] private Button buyButton;
+    [SerializeField] private Image productImage;
 
 
     [SerializeField] private StockBoxController boxToSpawn;
 
     private float boxCost;
 
-    private void Awake() {
+    private void Start() {
         buyButton.onClick.AddListener(() => {
-            BuyBox();
+            CartController.instance.AddToCart(info);
         });
     }
 
@@ -50,16 +51,6 @@ public class BuyStockFrameController : MonoBehaviour {
             buyButton.gameObject.SetActive(false);
             underleveledScreen.SetActive(true);
             underleveledText.text = "MUST BE LV " + food.requiredStoreLevel;
-        }
-    }
-
-    /// <summary>
-    /// Checks whether the player has enough money, and if so, spawns it in.
-    /// </summary>
-    public void BuyBox() {
-        if (StoreController.instance.CheckMoneyAvailable(boxCost) == true) {
-            StoreController.instance.SpendMoney(boxCost);
-            Instantiate(boxToSpawn, StoreController.instance.stockSpawnPoint.position, Quaternion.identity).SetupBox(info);
         }
     }
 

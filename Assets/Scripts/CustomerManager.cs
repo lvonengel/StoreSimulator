@@ -5,7 +5,7 @@ using UnityEngine;
 /// Manages how often and where the customer spawns.
 /// </summary>
 public class CustomerManager : MonoBehaviour {
-    public static CustomerManager instance;
+    public static CustomerManager instance {get; private set;}
 
     [SerializeField] private List<Customer> customersToSpawn = new List<Customer>();
 

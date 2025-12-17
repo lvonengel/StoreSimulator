@@ -1,8 +1,10 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the buttons when the user pauses mid game.
+/// </summary>
 public class PauseScreenUI : MonoBehaviour {
     
     [SerializeField] private Button resumeButton;

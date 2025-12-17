@@ -7,7 +7,7 @@ using UnityEngine;
 /// and all sound effects.
 /// </summary>
 public class AudioManager : MonoBehaviour {
-    public static AudioManager instance;
+    public static AudioManager instance {get; private set;}
 
     public AudioSource titleMusic;
 

@@ -7,7 +7,7 @@ using UnityEngine;
 /// to check customers out.
 /// </summary>
 public class Checkout : MonoBehaviour {
-    public static Checkout instance;
+    public static Checkout instance {get; private set;}
     
     [SerializeField] private TMP_Text priceText;
     [SerializeField] private GameObject checkoutScreen;

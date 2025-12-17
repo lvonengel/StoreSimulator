@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages opening apps on the home screen of the phone.
+/// </summary>
 public class PhoneScreenUI : MonoBehaviour {
 
     public static PhoneScreenUI instance {get; private set;}
@@ -10,14 +13,12 @@ public class PhoneScreenUI : MonoBehaviour {
     [SerializeField] private Button buyStockButton, buyFurnitureButton;
     [SerializeField] private Button homeButton;
 
-    [SerializeField] private Transform stockTemplate;
-    [SerializeField] private Transform stockTemplateContainer;
     [SerializeField] private Transform furnitureTemplate;
     [SerializeField] private Transform furnitureTemplateContainer;
 
     private void Awake() {
         instance = this;
-        stockTemplate.gameObject.SetActive(false);
+        
         furnitureTemplate.gameObject.SetActive(false);
 
         homeButton.onClick.AddListener(() => {
@@ -33,7 +34,6 @@ public class PhoneScreenUI : MonoBehaviour {
         });
     }
     private void Start() {
-        CreateStockTemplates();
         CreateFurnitureTemplates();
     }
     
@@ -42,21 +42,7 @@ public class PhoneScreenUI : MonoBehaviour {
         buyFurnitureScreen.SetActive(false);
     }
 
-    /// <summary>
-    /// Automatically creates the stock items in a grid by duplicating a template.
-    /// </summary>
-    private void CreateStockTemplates() {
-        foreach (Transform child in stockTemplateContainer) {
-            if (child == stockTemplate) continue;
-            Destroy(child.gameObject);
-        }
-        foreach (StockInfo food in StockInfoController.instance.allStock) {
-            Transform stockTransform = Instantiate(stockTemplate, stockTemplateContainer);
-            stockTransform.gameObject.SetActive(true);
-            stockTransform.GetComponent<BuyStockFrameController>().UpdateFrameInfo(food);
-        }
-    }
-
+    
     // <summary>
     /// Automatically creates the furniture items in a grid by duplicating a template.
     /// </summary>
