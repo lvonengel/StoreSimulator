@@ -9,20 +9,23 @@ public class PhoneScreenUI : MonoBehaviour {
     public static PhoneScreenUI instance {get; private set;}
 
     [SerializeField] private GameObject screen;
-    public GameObject buyStockScreen, buyFurnitureScreen, buyAdvertisementScreen;
-    [SerializeField] private Button buyStockButton, buyFurnitureButton, buyAdvertisementButton;
+    public GameObject buyStockScreen, buyFurnitureScreen, buyAdvertisementScreen, upgradeStoreSpaceScreen;
+    [SerializeField] private Button buyStockButton, buyFurnitureButton, buyAdvertisementButton, buyUpgradeStoreSpaceButton;
     [SerializeField] private Button homeButton;
 
     [SerializeField] private Transform furnitureTemplate;
     [SerializeField] private Transform furnitureTemplateContainer;
     [SerializeField] private Transform advertisementTemplate;
     [SerializeField] private Transform advertisementTemplateContainer;
+    [SerializeField] private Transform storeSpaceTemplate;
+    [SerializeField] private Transform storeSpaceTemplateContainer;
 
     private void Awake() {
         instance = this;
         
         furnitureTemplate.gameObject.SetActive(false);
         advertisementTemplate.gameObject.SetActive(false);
+        storeSpaceTemplate.gameObject.SetActive(false);
 
         homeButton.onClick.AddListener(() => {
             CloseAllPhoneApps();
@@ -39,16 +42,22 @@ public class PhoneScreenUI : MonoBehaviour {
             screen.SetActive(true);
             buyAdvertisementScreen.SetActive(true);
         });
+        buyUpgradeStoreSpaceButton.onClick.AddListener(() => {
+            screen.SetActive(true);
+            upgradeStoreSpaceScreen.SetActive(true);
+        });
     }
     private void Start() {
         CreateFurnitureTemplates();
         CreateAdvertisementTemplates();
+        CreateStoreSpaceTemplates();
     }
     
     public void CloseAllPhoneApps() {
         buyStockScreen.SetActive(false);
         buyFurnitureScreen.SetActive(false);
         buyAdvertisementScreen.SetActive(false);
+        upgradeStoreSpaceScreen.SetActive(false);
     }
 
     
@@ -80,6 +89,21 @@ public class PhoneScreenUI : MonoBehaviour {
             BuyAdvertisementFrameTemplate frame = advertisementTransform.GetComponent<BuyAdvertisementFrameTemplate>();
             frame.UpdateFrameInfo(advertisement);
             AdvertisementInfoController.instance.RegisterFrame(frame);
+        }
+    }
+    private void CreateStoreSpaceTemplates() {
+        UpgradeStoreSpaceInfoController.instance.ClearFrames();
+        foreach (Transform child in storeSpaceTemplateContainer) {
+            if (child == storeSpaceTemplate) continue;
+            Destroy(child.gameObject);
+        }
+
+        foreach (UpgradeStoreSpaceInfo storeSpace in UpgradeStoreSpaceInfoController.instance.storeSpaceInfo) {
+            Transform storeSpaceTransform = Instantiate(storeSpaceTemplate, storeSpaceTemplateContainer);
+            storeSpaceTransform.gameObject.SetActive(true);
+            UpgradeStoreSpaceFrameTemplate frame = storeSpaceTransform.GetComponent<UpgradeStoreSpaceFrameTemplate>();
+            frame.UpdateFrameInfo(storeSpace);
+            UpgradeStoreSpaceInfoController.instance.RegisterFrame(frame);
         }
     }
 
