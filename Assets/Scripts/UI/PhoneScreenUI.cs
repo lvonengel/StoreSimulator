@@ -9,17 +9,20 @@ public class PhoneScreenUI : MonoBehaviour {
     public static PhoneScreenUI instance {get; private set;}
 
     [SerializeField] private GameObject screen;
-    public GameObject buyStockScreen, buyFurnitureScreen;
-    [SerializeField] private Button buyStockButton, buyFurnitureButton;
+    public GameObject buyStockScreen, buyFurnitureScreen, buyAdvertisementScreen;
+    [SerializeField] private Button buyStockButton, buyFurnitureButton, buyAdvertisementButton;
     [SerializeField] private Button homeButton;
 
     [SerializeField] private Transform furnitureTemplate;
     [SerializeField] private Transform furnitureTemplateContainer;
+    [SerializeField] private Transform advertisementTemplate;
+    [SerializeField] private Transform advertisementTemplateContainer;
 
     private void Awake() {
         instance = this;
         
         furnitureTemplate.gameObject.SetActive(false);
+        advertisementTemplate.gameObject.SetActive(false);
 
         homeButton.onClick.AddListener(() => {
             CloseAllPhoneApps();
@@ -32,14 +35,20 @@ public class PhoneScreenUI : MonoBehaviour {
             screen.SetActive(true);
             buyFurnitureScreen.SetActive(true);
         });
+        buyAdvertisementButton.onClick.AddListener(() => {
+            screen.SetActive(true);
+            buyAdvertisementScreen.SetActive(true);
+        });
     }
     private void Start() {
         CreateFurnitureTemplates();
+        CreateAdvertisementTemplates();
     }
     
     public void CloseAllPhoneApps() {
         buyStockScreen.SetActive(false);
         buyFurnitureScreen.SetActive(false);
+        buyAdvertisementScreen.SetActive(false);
     }
 
     
@@ -54,7 +63,23 @@ public class PhoneScreenUI : MonoBehaviour {
         foreach (FurnitureInfo furniture in FurnitureInfoController.instance.furnitureInfo) {
             Transform furnitureTransform = Instantiate(furnitureTemplate, furnitureTemplateContainer);
             furnitureTransform.gameObject.SetActive(true);
-            furnitureTransform.GetComponent<BuyFurnitureFrameController>().UpdateFrameInfo(furniture);
+            furnitureTransform.GetComponent<BuyFurnitureFrameTemplate>().UpdateFrameInfo(furniture);
+        }
+    }
+
+    private void CreateAdvertisementTemplates() {
+        AdvertisementInfoController.instance.ClearFrames();
+        foreach (Transform child in advertisementTemplateContainer) {
+            if (child == advertisementTemplate) continue;
+            Destroy(child.gameObject);
+        }
+
+        foreach (AdvertisementInfo advertisement in AdvertisementInfoController.instance.advertisementInfo) {
+            Transform advertisementTransform = Instantiate(advertisementTemplate, advertisementTemplateContainer);
+            advertisementTransform.gameObject.SetActive(true);
+            BuyAdvertisementFrameTemplate frame = advertisementTransform.GetComponent<BuyAdvertisementFrameTemplate>();
+            frame.UpdateFrameInfo(advertisement);
+            AdvertisementInfoController.instance.RegisterFrame(frame);
         }
     }
 

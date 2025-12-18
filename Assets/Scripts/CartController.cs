@@ -106,7 +106,7 @@ public class CartController : MonoBehaviour {
         foreach (CartItem item in cartList) {
             Transform cartItemTransform = Instantiate(cartItemTemplate, cartItemTemplateContainer);
             cartItemTransform.gameObject.SetActive(true);
-            cartItemTransform.GetComponent<CartItemFrame>().UpdateFrameInfo(item.stock, item.quantity);
+            cartItemTransform.GetComponent<CartItemFrameTemplate>().UpdateFrameInfo(item.stock, item.quantity);
         }
     }
 

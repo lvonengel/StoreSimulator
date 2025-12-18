@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CartItemFrame : MonoBehaviour {
+public class CartItemFrameTemplate : MonoBehaviour {
     [SerializeField] private StockInfo info;
 
     [SerializeField] private TMP_Text nameText, quantityText;

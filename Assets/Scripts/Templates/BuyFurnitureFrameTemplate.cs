@@ -5,8 +5,8 @@ using UnityEngine.UI;
 /// <summary>
 /// Controls buying the furniture in the buy panel.
 /// </summary>
-public class BuyFurnitureFrameController : MonoBehaviour {
-    [SerializeField] private FurnitureInfo furniture;
+public class BuyFurnitureFrameTemplate : MonoBehaviour {
+    private FurnitureInfo furniture;
 
     [SerializeField] private TMP_Text nameText, priceText;
 
@@ -22,12 +22,35 @@ public class BuyFurnitureFrameController : MonoBehaviour {
         });
     }
 
+    public void OnEnable() {
+        StoreController.instance.OnStoreLevelChanged += StoreController_OnStoreLevelChanged;
+        if (furniture != null) {
+            RefreshBuyState();
+        }
+    }
+    public void OnDisable() {
+        StoreController.instance.OnStoreLevelChanged -= StoreController_OnStoreLevelChanged;
+    }
+
+    private void StoreController_OnStoreLevelChanged(int newLevel) {
+        if (furniture == null) {
+            Debug.Log("info is null");
+            return;
+        }
+
+        RefreshBuyState();
+    }
+
     public void UpdateFrameInfo(FurnitureInfo furniture) {
         this.furniture = furniture;
         // info = StockInfoController.instance.GetInfo(info.name);
         nameText.text = furniture.name;
         priceText.text = "Price: $" + furniture.price.ToString("F2");
 
+        RefreshBuyState();
+    }
+
+    private void RefreshBuyState() {
         if (CanBuy(furniture)) {
             buyButton.gameObject.SetActive(true);
         } else {
@@ -49,7 +72,7 @@ public class BuyFurnitureFrameController : MonoBehaviour {
     }
 
     public bool CanBuy(FurnitureInfo furniture) {
-        if (furniture.requiredStoreLevel < StoreController.instance.GetStoreLevel()) {
+        if (StoreController.instance.GetStoreLevel() >= furniture.requiredStoreLevel) {
             return true;
         }
         return false;

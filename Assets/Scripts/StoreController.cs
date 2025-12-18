@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +11,14 @@ public class StoreController : MonoBehaviour {
     public static StoreController instance {get; private set;}
 
     [SerializeField] private float currentMoney = 1000f;
+    public event EventHandler<OnExperienceChangedEventArgs> OnExperienceChanged;
+    public class OnExperienceChangedEventArgs : EventArgs {
+        public float experienceNormalized;
+    }
+    
+    public event Action<int> OnStoreLevelChanged;
     private int storeLevel = 1;
+    private int currentExperience = 0;
 
     public Transform stockSpawnPoint, furnitureSpawnPoint;
 
@@ -21,14 +29,16 @@ public class StoreController : MonoBehaviour {
     }
 
     private void Start() {
-        UIController.instance.UpdateMoney(currentMoney);
-        UIController.instance.UpdateStoreLevel(storeLevel);
+        StoreStatsUI.instance.UpdateMoney(currentMoney);
+        StoreStatsUI.instance.UpdateStoreLevel(storeLevel);
         // AudioManager.instance.StartBGM();
+
+
     }
 
     private void Update() {
         if (Keyboard.current.iKey.wasPressedThisFrame) {
-            AddMoney(100f);
+            AddMoney(2000f);
         }
 
         if (Keyboard.current.oKey.wasPressedThisFrame) {
@@ -40,7 +50,7 @@ public class StoreController : MonoBehaviour {
 
     public void AddMoney(float amountToAdd) {
         currentMoney += amountToAdd;
-        UIController.instance.UpdateMoney(currentMoney);
+        StoreStatsUI.instance.UpdateMoney(currentMoney);
     }
 
     public void SpendMoney(float amountToSpend) {
@@ -50,7 +60,7 @@ public class StoreController : MonoBehaviour {
             currentMoney = 0;
         }
 
-        UIController.instance.UpdateMoney(currentMoney);
+        StoreStatsUI.instance.UpdateMoney(currentMoney);
     }
 
     public bool CheckMoneyAvailable(float amountToCheck) {
@@ -62,6 +72,32 @@ public class StoreController : MonoBehaviour {
 
         return hasEnough;
     }
+
+    private int GetExperienceRequiredForNextLevel() {
+        return 30 + (storeLevel - 1) * 20;
+    }
+
+    public void AddExperience(int amount) {
+        currentExperience += amount;
+        int expToNext = GetExperienceRequiredForNextLevel();
+
+        while (currentExperience >= expToNext) {
+            currentExperience -= expToNext;
+            storeLevel++;
+
+            StoreStatsUI.instance.UpdateStoreLevel(storeLevel);
+            OnStoreLevelChanged?.Invoke(storeLevel);
+
+            expToNext = GetExperienceRequiredForNextLevel();
+        }
+
+        float normalized = (float)currentExperience / expToNext;
+
+        OnExperienceChanged?.Invoke(this, new OnExperienceChangedEventArgs {
+            experienceNormalized = normalized
+        });
+    }
+
 
     public int GetStoreLevel() {
         return storeLevel;

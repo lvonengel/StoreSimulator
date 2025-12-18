@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// Controls the buy menu UI where players buy stock or furniture.
 /// This controls switching the two tabs.
 /// </summary>
-public class BuyStockController : MonoBehaviour {
+public class BuyStockUI : MonoBehaviour {
     [SerializeField] private Transform stockTemplate;
     [SerializeField] private Transform stockTemplateContainer;
     [SerializeField] private GameObject stockPanel;
@@ -49,7 +49,7 @@ public class BuyStockController : MonoBehaviour {
         foreach (StockInfo food in StockInfoController.instance.allStock) {
             Transform stockTransform = Instantiate(stockTemplate, stockTemplateContainer);
             stockTransform.gameObject.SetActive(true);
-            stockTransform.GetComponent<BuyStockFrameController>().UpdateFrameInfo(food);
+            stockTransform.GetComponent<BuyStockFrameTemplate>().UpdateFrameInfo(food);
         }
     }
 

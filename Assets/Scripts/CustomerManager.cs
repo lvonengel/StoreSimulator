@@ -29,6 +29,10 @@ public class CustomerManager : MonoBehaviour {
         }
     }
 
+    public void SetTimeBetweenCustomers(int time) {
+        timeBetweenCustomers = time;
+    }
+
     public void SpawnCustomer() {
         Instantiate(customersToSpawn[Random.Range(0, 16)]);
 

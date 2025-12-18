@@ -11,8 +11,6 @@ public class UIController : MonoBehaviour {
 
     public GameObject updatePricePanel;
 
-    [SerializeField] private TMP_Text moneyText;
-    [SerializeField] private TMP_Text storeLevelText;
     [SerializeField] private Button closeFurnitureScreenButton;
 
     public GameObject buyStockScreen;
@@ -37,13 +35,6 @@ public class UIController : MonoBehaviour {
         if (Keyboard.current.escapeKey.wasPressedThisFrame) {
             PauseUnpause();
         }
-    }
-
-    public void UpdateMoney(float currentMoney) {
-        moneyText.text = "$" + currentMoney.ToString("F2");
-    }
-    public void UpdateStoreLevel(int storeLevel) {
-        storeLevelText.text = "Store Level: " + storeLevel.ToString();
     }
 
     public void OpenUpdatePrice(StockInfo stockToUpdate) {

@@ -53,6 +53,7 @@ public class Checkout : MonoBehaviour {
             customersInQueue[0].StartLeaving();
             customersInQueue.RemoveAt(0);
             UpdateQueue();
+            StoreController.instance.AddExperience(5);
 
             if (AudioManager.instance != null) {
                 AudioManager.instance.PlaySFX(3);
