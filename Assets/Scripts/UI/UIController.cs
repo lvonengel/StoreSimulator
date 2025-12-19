@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour {
 
     public GameObject pauseScreen;
     public GameObject phoneScreen;
+    public GameObject endOfDayScreen;
 
 
     private void Awake() {

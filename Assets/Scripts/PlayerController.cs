@@ -86,6 +86,12 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        if (UIController.instance.endOfDayScreen != null) {
+            if (UIController.instance.endOfDayScreen.activeSelf == true) {
+                return;
+            }
+        }
+
         Vector2 lookinput = lookAction.action.ReadValue<Vector2>();
 
         horiRot += lookinput.x * Time.deltaTime * lookSpeed;

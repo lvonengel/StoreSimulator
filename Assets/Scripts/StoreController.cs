@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Controls the money system in the game.
+/// Controls the money and store level system in the game.
 /// </summary>
 public class StoreController : MonoBehaviour {
     public static StoreController instance {get; private set;}
@@ -50,6 +50,7 @@ public class StoreController : MonoBehaviour {
 
     public void AddMoney(float amountToAdd) {
         currentMoney += amountToAdd;
+        DayStatsController.instance.RegisterMoneyMade(amountToAdd);
         StoreStatsUI.instance.UpdateMoney(currentMoney);
     }
 
@@ -59,7 +60,7 @@ public class StoreController : MonoBehaviour {
         if (currentMoney < 0) {
             currentMoney = 0;
         }
-
+        DayStatsController.instance.RegisterMoneySpent(amountToSpend);
         StoreStatsUI.instance.UpdateMoney(currentMoney);
     }
 

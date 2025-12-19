@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class PhoneScreenUI : MonoBehaviour {
     public static PhoneScreenUI instance {get; private set;}
 
     [SerializeField] private GameObject screen;
+    [SerializeField] private TMP_Text timeText;
     public GameObject buyStockScreen, buyFurnitureScreen, buyAdvertisementScreen, upgradeStoreSpaceScreen;
     [SerializeField] private Button buyStockButton, buyFurnitureButton, buyAdvertisementButton, buyUpgradeStoreSpaceButton;
     [SerializeField] private Button homeButton;
@@ -47,6 +49,23 @@ public class PhoneScreenUI : MonoBehaviour {
             upgradeStoreSpaceScreen.SetActive(true);
         });
     }
+
+    private void OnEnable() {
+        TimeController.instance.OnTimeChanged += UpdateTime;
+        UpdateTime(TimeController.instance.GetHour(), TimeController.instance.GetMinute());
+
+    }
+
+    private void OnDisable() {
+        if (TimeController.instance != null)
+            TimeController.instance.OnTimeChanged -= UpdateTime;
+    }
+
+    private void UpdateTime(int hour, int minute) {
+        timeText.text = $"{hour:00}:{minute:00}";
+    }
+
+
     private void Start() {
         CreateFurnitureTemplates();
         CreateAdvertisementTemplates();
