@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa92f34c25c883a4383a1776a2a162fb, type: 3}
+  m_Name: FireAnt
+  m_EditorClassIdentifier: Assembly-CSharp::CardInfo
+  cardName: Fire Ant
+  rarity: 0
+  actionDescription: 
+  cardLore: 
+  attackPower: 2
+  currentHealth: 5
+  manaCost: 3
+  characterSprite: {fileID: 21300000, guid: c25d855d2f6d6a04aa98bf5847ca2f88, type: 3}
+  bgSprite: {fileID: 21300000, guid: 051b6f6c81b57ac4a9ef7f65b46ae866, type: 3}

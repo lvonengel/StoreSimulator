@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class StockInfoController : MonoBehaviour {
     public static StockInfoController instance {get; private set;}
-    [SerializeField] private List<StockInfo> foodInfo, produceInfo;
+    [SerializeField] private List<StockInfo> foodInfo, produceInfo, cardPackInfo;
 
     public List<StockInfo> allStock = new List<StockInfo>();
 
@@ -15,6 +15,7 @@ public class StockInfoController : MonoBehaviour {
     private void Awake() {
         instance = this;
 
+        allStock.AddRange(cardPackInfo);
         allStock.AddRange(foodInfo);
         allStock.AddRange(produceInfo);
 

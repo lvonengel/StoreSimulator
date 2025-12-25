@@ -226,6 +226,12 @@ public class PlayerController : MonoBehaviour {
                     }
                 }
 
+                if (Keyboard.current.fKey.wasPressedThisFrame) {
+                    if (heldPickup.info != null && heldPickup.info.cardPack != null) {
+                        Debug.Log("player pressed f with cardpack in hand");
+                    }
+                }
+
                 if (Mouse.current.rightButton.wasPressedThisFrame) {
 
                     heldPickup.Release();

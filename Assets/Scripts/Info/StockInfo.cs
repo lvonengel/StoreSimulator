@@ -17,4 +17,5 @@ public class StockInfo
     public float price, currentPrice;
 
     public StockObject stockObject;
+    public CardPack cardPack;
 }
