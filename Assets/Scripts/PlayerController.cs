@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         Cursor.lockState = CursorLockMode.Locked;
-         CardOpeningUI.instance.OnPackOpeningFinished += CardOpeningUI_OnPackOpeningFinished;
+        CardOpeningUI.instance.OnPackOpeningFinished += CardOpeningUI_OnPackOpeningFinished;
     }
 
     //Once a pack finished opening, delete it
@@ -169,6 +169,7 @@ public class PlayerController : MonoBehaviour {
     private void HandleNothingInHand() {
         Ray ray = theCam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
         RaycastHit hit;
+        UserControlUI.instance.ShowOnlyControls(UserControlUI.instance.nothingInHandControls);
 
         //picks an object to hold
         if (Mouse.current.leftButton.wasPressedThisFrame) {
@@ -260,6 +261,8 @@ public class PlayerController : MonoBehaviour {
     private void HandlePickupInHand() {
         Ray ray = theCam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
         RaycastHit hit;
+        UserControlUI.instance.ShowOnlyControls(UserControlUI.instance.stockInHandControls);
+
         // placing stock onto a shelf
         if (Mouse.current.leftButton.wasPressedThisFrame) {
             if (Physics.Raycast(ray, out hit, interactionRange, whatIsShelf)) {
@@ -286,6 +289,8 @@ public class PlayerController : MonoBehaviour {
                 }
 
                 CardOpeningUI.instance.ShowPackOpening(pulledCards);
+                UserControlUI.instance.ShowOnlyControls(UserControlUI.instance.openingPackControls);
+
             }
         }
 
@@ -310,6 +315,7 @@ public class PlayerController : MonoBehaviour {
     private void HandleBoxInHand() {
         Ray ray = theCam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
         RaycastHit hit;
+        UserControlUI.instance.ShowOnlyControls(UserControlUI.instance.boxInHandControls);
 
         //placing stock onto a shelf
         if (Mouse.current.leftButton.isPressed) {
@@ -378,6 +384,7 @@ public class PlayerController : MonoBehaviour {
     /// Handles when there is furniture in your hand.
     /// </summary>
     private void HandleFurnitureInHand() {
+        UserControlUI.instance.ShowOnlyControls(UserControlUI.instance.furnitureControls);
         //grid snapping
         Vector3 targetPos = furniturePoint.position;
         heldFurniture.SetPlacementPosition(targetPos);
