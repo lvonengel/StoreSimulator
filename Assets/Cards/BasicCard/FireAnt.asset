@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireAnt
   m_EditorClassIdentifier: Assembly-CSharp::CardInfo
   cardName: Fire Ant
-  rarity: 0
+  rarity: 1
   actionDescription: 
   cardLore: 
   attackPower: 2

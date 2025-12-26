@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Grinner
   m_EditorClassIdentifier: Assembly-CSharp::CardInfo
   cardName: Grinner
-  rarity: 0
+  rarity: 1
   actionDescription: 
   cardLore: 
   attackPower: 2

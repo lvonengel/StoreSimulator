@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa92f34c25c883a4383a1776a2a162fb, type: 3}
   m_Name: Larva
   m_EditorClassIdentifier: Assembly-CSharp::CardInfo
-  cardName: Imp
-  rarity: 0
+  cardName: Larva
+  rarity: 1
   actionDescription: 
   cardLore: 
   attackPower: 1
-  currentHealth: 5
-  manaCost: 2
-  characterSprite: {fileID: 21300000, guid: 913b6398cf3b1bf4986f496a0359ba9b, type: 3}
+  currentHealth: 1
+  manaCost: 0
+  characterSprite: {fileID: 21300000, guid: bb74c38418538b640b20840a23d57902, type: 3}
   bgSprite: {fileID: 21300000, guid: 947eb1811c248cb4f8704b3548422538, type: 3}

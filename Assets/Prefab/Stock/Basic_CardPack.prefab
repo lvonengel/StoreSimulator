@@ -100,14 +100,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StockObject
   info:
-    name: 
+    name: Basic Card Pack
     requiredStoreLevel: 0
     typeOfStock: 0
     price: 0
     currentPrice: 0
     stockObject: {fileID: 0}
     cardPack: {fileID: 0}
-  moveSpeed: 0
+  moveSpeed: 5
   isPlaced: 0
   theRB: {fileID: 5976928177613057444}
   col: {fileID: -4798425415426752584}

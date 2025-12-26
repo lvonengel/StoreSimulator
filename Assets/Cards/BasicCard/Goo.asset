@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Goo
   m_EditorClassIdentifier: Assembly-CSharp::CardInfo
   cardName: Goo
-  rarity: 0
+  rarity: 1
   actionDescription: 
   cardLore: 
   attackPower: 1

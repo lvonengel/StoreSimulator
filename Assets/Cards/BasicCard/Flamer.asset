@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Flamer
   m_EditorClassIdentifier: Assembly-CSharp::CardInfo
   cardName: Flamer
-  rarity: 0
+  rarity: 1
   actionDescription: 
   cardLore: 
   attackPower: 5

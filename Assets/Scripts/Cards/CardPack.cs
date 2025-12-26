@@ -8,6 +8,6 @@ using UnityEngine;
 public class CardPack : ScriptableObject {
     public string packName;
     public List<CardInfo> possibleCardsList = new List<CardInfo>();
-    [SerializeField] private int cardsPerPack = 5;
+    public int cardsPerPack = 5;
 
 }

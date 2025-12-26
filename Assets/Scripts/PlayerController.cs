@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -53,6 +54,15 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         Cursor.lockState = CursorLockMode.Locked;
+         CardOpeningUI.instance.OnPackOpeningFinished += CardOpeningUI_OnPackOpeningFinished;
+    }
+
+    //Once a pack finished opening, delete it
+    private void CardOpeningUI_OnPackOpeningFinished(object sender, System.EventArgs e) {
+        if (heldPickup != null) {
+            Destroy(heldPickup.gameObject);
+            heldPickup = null;
+        }
     }
 
     private void Update() {
@@ -269,11 +279,17 @@ public class PlayerController : MonoBehaviour {
         //if the stock is a card pack, open it.
         if (Keyboard.current.fKey.wasPressedThisFrame) {
             if (heldPickup.info != null && heldPickup.info.cardPack != null) {
-                Debug.Log("player pressed f with cardpack in hand");
+                List<CardInfo> pulledCards = CardPackOpener.OpenPack(heldPickup.info.cardPack);
+
+                foreach (CardInfo card in pulledCards) {
+                    Debug.Log(card.cardName + " (" + card.rarity + ")");
+                }
+
+                CardOpeningUI.instance.ShowPackOpening(pulledCards);
             }
         }
 
-        // throw away whatever is in hand
+        // toss away whatever is in hand
         if (Mouse.current.rightButton.wasPressedThisFrame) {
             heldPickup.Release();
             heldPickup.theRB.AddForce(theCam.transform.forward * throwForce, ForceMode.Impulse);

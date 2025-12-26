@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Husk
   m_EditorClassIdentifier: Assembly-CSharp::CardInfo
   cardName: Husk
-  rarity: 0
+  rarity: 1
   actionDescription: 
   cardLore: 
   attackPower: 1
