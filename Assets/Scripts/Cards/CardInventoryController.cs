@@ -35,6 +35,13 @@ public class CardInventoryController : MonoBehaviour {
         ownedCards.Add(newEntry);
     }
 
+    /// adds multiple cards to the inventory
+    public void AddMultipleCards(List<CardInfo> cards) {
+        for (int i = 0; i < cards.Count; i++) {
+            AddCard(cards[i]);
+        }
+    }
+
     // removes a card from inventory
     public void RemoveCard(CardInfo card, int amount = 1) {
         for (int i = 0; i < ownedCards.Count; i++) {

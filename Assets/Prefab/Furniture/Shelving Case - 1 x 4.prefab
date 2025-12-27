@@ -103,8 +103,6 @@ MonoBehaviour:
   mainObject: {fileID: 6608567731047658491}
   placingObject: {fileID: 112118373848671863}
   col: {fileID: 6310033408742661056}
-  furnitureName: Shelving Case - 1 x 4
-  price: 250
   standPoint: {fileID: 7842883683094045691}
   shelves:
   - {fileID: 88119994659070895}

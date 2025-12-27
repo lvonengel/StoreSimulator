@@ -68,7 +68,6 @@ public class CardOpeningUI : MonoBehaviour {
             case CardOpeningState.displayAllCards:
                 CloseUI();
                 OnPackOpeningFinished?.Invoke(this, EventArgs.Empty);
-                OnPackOpeningFinished = null;
                 break;
         }
     }

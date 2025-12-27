@@ -8,7 +8,7 @@ public class StockBoxController : MonoBehaviour {
     public StockInfo info; 
 
     [SerializeField] private List<Transform> bigDrinkPoints;
-    [SerializeField] private List<Transform> cerealPoints, tubeChipsPoints, fruitPoints, largeFruitPoints;
+    [SerializeField] private List<Transform> cerealPoints, tubeChipsPoints, fruitPoints, largeFruitPoints, cardPoints;
 
     public List<StockObject> stockInBox;
 
@@ -60,6 +60,9 @@ public class StockBoxController : MonoBehaviour {
 
             case StockInfo.StockType.fruitLarge:
                 activePoints.AddRange(largeFruitPoints);
+                break;
+            case StockInfo.StockType.cardPack:
+                activePoints.AddRange(cardPoints);
                 break;
         }
 
@@ -139,6 +142,9 @@ public class StockBoxController : MonoBehaviour {
 
             case StockInfo.StockType.fruitLarge:
                 toReturn = largeFruitPoints.Count;
+                break;
+            case StockInfo.StockType.cardPack:
+                toReturn = cardPoints.Count;
                 break;
         }
 

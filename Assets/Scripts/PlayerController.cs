@@ -284,11 +284,8 @@ public class PlayerController : MonoBehaviour {
             if (heldPickup.info != null && heldPickup.info.cardPack != null) {
                 List<CardInfo> pulledCards = CardPackOpener.OpenPack(heldPickup.info.cardPack);
 
-                foreach (CardInfo card in pulledCards) {
-                    Debug.Log(card.cardName + " (" + card.rarity + ")");
-                }
-
                 CardOpeningUI.instance.ShowPackOpening(pulledCards);
+                CardInventoryController.instance.AddMultipleCards(pulledCards);
                 UserControlUI.instance.ShowOnlyControls(UserControlUI.instance.openingPackControls);
 
             }

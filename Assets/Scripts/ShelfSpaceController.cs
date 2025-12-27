@@ -11,7 +11,7 @@ public class ShelfSpaceController : MonoBehaviour {
     [SerializeField] private List<StockObject> objectsOnShelf;
 
     [SerializeField] private List<Transform> bigDrinkPoints;
-    [SerializeField] private List<Transform> cerealPoints, tubeChipsPoints, fruitPoints, largeFruitPoints;
+    [SerializeField] private List<Transform> cerealPoints, tubeChipsPoints, fruitPoints, largeFruitPoints, cardPackPoints;
 
     [SerializeField] private TMP_Text shelfLabel;
 
@@ -58,6 +58,11 @@ public class ShelfSpaceController : MonoBehaviour {
                             preventPlacing = true;
                         }
                         break;
+                    case StockInfo.StockType.cardPack:
+                        if (objectsOnShelf.Count >= cardPackPoints.Count) {
+                            preventPlacing = true;
+                        }
+                        break;
                 }
 
                 
@@ -87,6 +92,9 @@ public class ShelfSpaceController : MonoBehaviour {
 
                 case StockInfo.StockType.fruitLarge:
                     objectToPlace.transform.SetParent(largeFruitPoints[objectsOnShelf.Count]);
+                    break;
+                case StockInfo.StockType.cardPack:
+                    objectToPlace.transform.SetParent(cardPackPoints[objectsOnShelf.Count]);
                     break;
             }
 

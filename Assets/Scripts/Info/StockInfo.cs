@@ -10,7 +10,7 @@ public class StockInfo
     public int requiredStoreLevel;
 
     public enum StockType {
-        cereal, bigDrink, chipsTube, fruit, fruitLarge
+        cereal, bigDrink, chipsTube, fruit, fruitLarge, cardPack
     }
     public StockType typeOfStock;
 
