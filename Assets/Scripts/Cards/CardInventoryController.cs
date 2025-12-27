@@ -12,10 +12,11 @@ public class CardInventoryController : MonoBehaviour {
         public int quantity;
     }
 
-    public List<CardInventoryEntry> ownedCards = new List<CardInventoryEntry>();
+    public List<CardInventoryEntry> ownedCards;
 
     private void Awake() {
         instance = this;
+        ownedCards = new List<CardInventoryEntry>();
     }
 
     //adds a card to the inventory
@@ -56,6 +57,16 @@ public class CardInventoryController : MonoBehaviour {
             }
         }
     }
+
+    public bool HasCard(CardInfo card) {
+        for (int i = 0; i < ownedCards.Count; i++) {
+            if (ownedCards[i].card == card) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 }

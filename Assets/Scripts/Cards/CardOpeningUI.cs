@@ -87,10 +87,14 @@ public class CardOpeningUI : MonoBehaviour {
             Destroy(currentRevealCard);
         }
 
-        currentRevealCard = Instantiate(cardPrefab, revealParent);
 
+        CardInfo card = pulledCards[revealIndex];
+        bool isNew = !CardInventoryController.instance.HasCard(card);
+        
+        currentRevealCard = Instantiate(cardPrefab, revealParent);
         CardDisplay display = currentRevealCard.GetComponent<CardDisplay>();
-        display.SetCard(pulledCards[revealIndex]);
+
+        display.SetCard(pulledCards[revealIndex], isNew);
 
         revealIndex++;
     }
@@ -108,9 +112,13 @@ public class CardOpeningUI : MonoBehaviour {
         allCardsParent.gameObject.SetActive(true);
 
         for (int i = 0; i < pulledCards.Count; i++) {
+            CardInfo card = pulledCards[i];
+            bool isNew = !CardInventoryController.instance.HasCard(card);
+
             GameObject cardObj = Instantiate(cardPrefab, allCardsParent);
             CardDisplay display = cardObj.GetComponent<CardDisplay>();
-            display.SetCard(pulledCards[i]);
+
+            display.SetCard(pulledCards[i], isNew);
         }
     }
 

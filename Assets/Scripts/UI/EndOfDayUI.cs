@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class EndOfDayUI : MonoBehaviour {
 
     public static EndOfDayUI instance {get; private set;}
+    [SerializeField] private GameObject endOfDayScreen;
     
     [SerializeField] private TMP_Text itemsSoldValue, moneySpentText, moneyMadeText, netMoney;
     [SerializeField] private Button continueButton;
@@ -20,7 +21,7 @@ public class EndOfDayUI : MonoBehaviour {
             DayStatsController.instance.ResetDay();
             TimeController.instance.StartNewDay();
             Cursor.lockState = CursorLockMode.Locked;
-            gameObject.SetActive(false);
+            endOfDayScreen.SetActive(false);
         });
     }
 
@@ -33,7 +34,7 @@ public class EndOfDayUI : MonoBehaviour {
 
     public void Show() {
         Cursor.lockState = CursorLockMode.None;
-        gameObject.SetActive(true);
+        endOfDayScreen.SetActive(true);
     }
 
 

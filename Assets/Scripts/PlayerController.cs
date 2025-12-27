@@ -9,11 +9,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour {
 
     // Movement
-    [SerializeField] private InputActionReference moveAction;
-    [SerializeField] private InputActionReference jumpAction;
-    [SerializeField] private InputActionReference lookAction;
+    [SerializeField] private InputActionReference moveAction, jumpAction, lookAction;
     [SerializeField] private Camera theCam;
-
     [SerializeField] private CharacterController charCon;
 
     [SerializeField] private float moveSpeed;
@@ -50,6 +47,8 @@ public class PlayerController : MonoBehaviour {
 
 
     [SerializeField] private Transform furniturePoint;
+
+    private List<CardInfo> pendingPulledCards;
     
 
     private void Start() {
@@ -59,6 +58,11 @@ public class PlayerController : MonoBehaviour {
 
     //Once a pack finished opening, delete it
     private void CardOpeningUI_OnPackOpeningFinished(object sender, System.EventArgs e) {
+        if (pendingPulledCards != null) {
+            CardInventoryController.instance.AddMultipleCards(pendingPulledCards);
+            pendingPulledCards = null;
+        }
+        
         if (heldPickup != null) {
             Destroy(heldPickup.gameObject);
             heldPickup = null;
@@ -282,12 +286,11 @@ public class PlayerController : MonoBehaviour {
         //if the stock is a card pack, open it.
         if (Keyboard.current.fKey.wasPressedThisFrame) {
             if (heldPickup.info != null && heldPickup.info.cardPack != null) {
-                List<CardInfo> pulledCards = CardPackOpener.OpenPack(heldPickup.info.cardPack);
+                pendingPulledCards = CardPackOpener.OpenPack(heldPickup.info.cardPack);
 
-                CardOpeningUI.instance.ShowPackOpening(pulledCards);
-                CardInventoryController.instance.AddMultipleCards(pulledCards);
+                CardOpeningUI.instance.ShowPackOpening(pendingPulledCards);
                 UserControlUI.instance.ShowOnlyControls(UserControlUI.instance.openingPackControls);
-
+                
             }
         }
 
