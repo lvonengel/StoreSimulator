@@ -104,6 +104,17 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        if (CardsCollectedBookUI.instance.chooseBookScreen != null) {
+            if (CardsCollectedBookUI.instance.chooseBookScreen.activeSelf == true) {
+                return;
+            }
+        }
+        if (CardsCollectedBookUI.instance.bookScreen != null) {
+            if (CardsCollectedBookUI.instance.bookScreen.activeSelf == true) {
+                return;
+            }
+        }
+
         HandleMovement();
 
         //Handles player interactions depending on what they are holding.

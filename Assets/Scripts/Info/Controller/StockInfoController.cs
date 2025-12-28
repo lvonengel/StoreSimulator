@@ -55,4 +55,8 @@ public class StockInfoController : MonoBehaviour {
             }
         }
     }
+
+    public List<StockInfo> GetCardPackInfo() {
+        return cardPackInfo;
+    }
 }
