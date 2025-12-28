@@ -4,6 +4,7 @@ using UnityEngine;
 public class CardInfo : ScriptableObject {
     
     public string cardName;
+    public CardPack cardPack;
     public enum Rarity { Common, Uncommon, Rare, Epic, Legendary}
     public Rarity rarity;
 

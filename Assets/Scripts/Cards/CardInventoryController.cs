@@ -41,6 +41,7 @@ public class CardInventoryController : MonoBehaviour {
         for (int i = 0; i < cards.Count; i++) {
             AddCard(cards[i]);
         }
+        AchievementInfoController.instance.RefreshAllFrames();
     }
 
     // removes a card from inventory
@@ -65,6 +66,21 @@ public class CardInventoryController : MonoBehaviour {
             }
         }
         return false;
+    }
+
+    /// <summary>
+    /// Gets the list of the cards the player owns in a certain pack
+    /// </summary>
+    /// <param name="cardPack">The cardpack you want to get the number of</param>
+    /// <returns></returns>
+    public List<CardInventoryEntry> GetCurrentCardsInPack(CardPack cardPack) {
+        List<CardInventoryEntry> cardsInThisPack = new List<CardInventoryEntry>();
+        foreach (CardInventoryEntry cardEntry in ownedCards) {
+            if (cardEntry.card.cardPack == cardPack) {
+                cardsInThisPack.Add(cardEntry);
+            }
+        }
+        return cardsInThisPack;
     }
 
 

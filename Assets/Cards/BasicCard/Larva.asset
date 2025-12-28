@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Larva
   m_EditorClassIdentifier: Assembly-CSharp::CardInfo
   cardName: Larva
+  cardPack: {fileID: 11400000, guid: fe52fb68f2aca044daa8dba6a904b0e7, type: 2}
   rarity: 1
   actionDescription: 
   cardLore: 

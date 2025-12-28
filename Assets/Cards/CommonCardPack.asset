@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e921bcec5a3144c9d416836674fd30, type: 3}
   m_Name: CommonCardPack
   m_EditorClassIdentifier: Assembly-CSharp::CardPack
-  packName: 
+  packName: Basic Card Pack
   possibleCardsList:
   - {fileID: 11400000, guid: 32e484bcb5d723746872ef0e81463efc, type: 2}
   - {fileID: 11400000, guid: a416045370ded4841abd92884431c8a1, type: 2}

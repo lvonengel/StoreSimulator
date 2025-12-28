@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Devil
   m_EditorClassIdentifier: Assembly-CSharp::CardInfo
   cardName: Devil
+  cardPack: {fileID: 11400000, guid: fe52fb68f2aca044daa8dba6a904b0e7, type: 2}
   rarity: 0
   actionDescription: 
   cardLore: 

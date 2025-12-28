@@ -19,13 +19,19 @@ public class CardsCollectedBookUI : MonoBehaviour {
     private int pageIndex = 0;
     private const int CARDS_PER_PAGE = 6;
     private const int CARDS_PER_SPREAD = CARDS_PER_PAGE * 2;
+    private CardPack currentCardPackBook;
 
     private void Awake() {
         instance = this;
         bookScreen.SetActive(false);
         chooseBookScreen.SetActive(false);
+        achievementTemplate.gameObject.SetActive(false);
         ClearSlots(leftSlots);
         ClearSlots(rightSlots);
+    }
+
+    private void Start() {
+        CreateCardAchievementBook();
     }
 
     private void Update() {
@@ -39,39 +45,35 @@ public class CardsCollectedBookUI : MonoBehaviour {
                 bookScreen.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
             }
-
-            // bool opening = !bookScreen.activeSelf;
-            // bookScreen.SetActive(opening);
-
-            // if (opening) {
-            //     UserControlUI.instance.HideAllControls();
-            //     PopulatePages();
-            //     UpdateStatTexts();
-            // }
         }
 
         if (bookScreen.activeSelf == true) {
             if (Keyboard.current.qKey.wasPressedThisFrame) {
-                PreviousPage();
+                PreviousPage(currentCardPackBook);
             }
             if (Keyboard.current.eKey.wasPressedThisFrame) {
-                NextPage();
+                NextPage(currentCardPackBook);
             }
         }
     }
 
-    private void PopulatePages() {
+    /// <summary>
+    /// Updates the slots of the book screen based on the cardpack.
+    /// </summary>
+    /// <param name="cardPack"></param>
+    private void PopulatePages(CardPack cardPack) {
         ClearSlots(leftSlots);
         ClearSlots(rightSlots);
 
-        List<CardInventoryController.CardInventoryEntry> ownedCards = CardInventoryController.instance.ownedCards;
+        List<CardInventoryController.CardInventoryEntry> cardsInThisPack = CardInventoryController.instance.GetCurrentCardsInPack(cardPack);
+
         int startIndex = pageIndex * CARDS_PER_SPREAD;
 
         for (int i = 0; i < CARDS_PER_SPREAD; i++) {
             int cardIndex = startIndex + i;
-            if (cardIndex >= ownedCards.Count) break;
+            if (cardIndex >= cardsInThisPack.Count) break;
 
-            CardInventoryController.CardInventoryEntry entry = ownedCards[cardIndex];
+            CardInventoryController.CardInventoryEntry entry = cardsInThisPack[cardIndex];
 
             if (i < CARDS_PER_PAGE) {
                 leftSlots[i].gameObject.SetActive(true);
@@ -85,33 +87,44 @@ public class CardsCollectedBookUI : MonoBehaviour {
         UpdateStatTexts();
     }
 
-    private void NextPage() {
+    //goes to the next page of the book screen
+    private void NextPage(CardPack cardPack) {
         int maxPage = Mathf.Max(0, (CardInventoryController.instance.ownedCards.Count - 1) / CARDS_PER_SPREAD);
 
         if (pageIndex < maxPage) {
             pageIndex++;
-            PopulatePages();
+            PopulatePages(cardPack);
         }
     }
 
-    private void PreviousPage() {
+    //goes to the previous page of the book screen
+    private void PreviousPage(CardPack cardPack) {
         if (pageIndex > 0) {
             pageIndex--;
-            PopulatePages();
+            PopulatePages(cardPack);
         }
     }
 
+    /// <summary>
+    /// Clears the slots on each page.
+    /// </summary>
+    /// <param name="slots"></param>
     private void ClearSlots(CardCollectedFrameTemplate[] slots) {
         for (int i = 0; i < slots.Length; i++) {
             slots[i].gameObject.SetActive(false);
         }
     }
 
+    /// <summary>
+    /// Updates the stats for the book screen.
+    /// This includes which pack you're looking at, what page,
+    /// and how many you've collected in this pack. 
+    /// </summary>
     private void UpdateStatTexts() {
         int totalCards = CardInventoryController.instance.ownedCards.Count;
 
-        cardPackNameText.text = $"Collected: {totalCards}";
-        cardsCollectedText.text = $"Cards: {totalCards}";
+        cardPackNameText.text = $"Card Pack: {currentCardPackBook.packName}";
+        cardsCollectedText.text = $"Cards: {CardInventoryController.instance.GetCurrentCardsInPack(currentCardPackBook).Count}/{currentCardPackBook.possibleCardsList.Count}";
 
         int maxPage = Mathf.Max(1,
             Mathf.CeilToInt(totalCards / (float)CARDS_PER_SPREAD));
@@ -120,8 +133,11 @@ public class CardsCollectedBookUI : MonoBehaviour {
     }
 
 
+    /// <summary>
+    /// Creates the achievement templates based on the stockinfo list for cardpacks.
+    /// </summary>
     private void CreateCardAchievementBook() {
-        // AdvertisementInfoController.instance.ClearFrames();
+        AchievementInfoController.instance.ClearFrames();
         foreach (Transform child in achievementTemplateContainer) {
             if (child == achievementTemplate) continue;
             Destroy(child.gameObject);
@@ -132,18 +148,22 @@ public class CardsCollectedBookUI : MonoBehaviour {
                 achievementTransform.gameObject.SetActive(true);
                 AchievementScreenFrameTemplate frame = achievementTransform.GetComponent<AchievementScreenFrameTemplate>();
                 frame.UpdateFrameInfo(cardInfo.cardPack);
-                // AdvertisementInfoController.instance.RegisterFrame(frame);
+                AchievementInfoController.instance.RegisterFrame(frame);
                 
             }
         }
     }
     
-    public void OpenGivenBook(CardPack cardpack) {
+    /// <summary>
+    /// Opens the book screen with just the given card pack
+    /// </summary>
+    /// <param name="cardPack">The pack of cards you want the book screen to show</param>
+    public void OpenGivenBook(CardPack cardPack) {
+        currentCardPackBook = cardPack;
         bookScreen.SetActive(true);
-        PopulatePages();
+        PopulatePages(cardPack);
         UpdateStatTexts();
     }
-
     
 
 }

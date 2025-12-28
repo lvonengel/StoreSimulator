@@ -7,9 +7,18 @@ public class StoreStatCanvasUI : MonoBehaviour {
     public static StoreStatCanvasUI instance {get; private set;}
     
     [SerializeField] private GameObject dayStatsUI;
+    [SerializeField] private GameObject centerDot;
 
     private void Awake() {
         instance = this;
+    }
+
+    private void Update() {
+        if (Cursor.lockState == CursorLockMode.None) {
+            centerDot.SetActive(false);
+        } else {
+            centerDot.SetActive(true);
+        }
     }
 
     public void ShowHideDayStats() {
