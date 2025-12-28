@@ -18,6 +18,7 @@ public class CardOpeningUI : MonoBehaviour {
     [SerializeField] private Transform revealParent;
     [SerializeField] private Transform allCardsParent;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private float localCardScale = 1.5f;
 
     private CardOpeningState cardOpeningState;
 
@@ -92,6 +93,7 @@ public class CardOpeningUI : MonoBehaviour {
         bool isNew = !CardInventoryController.instance.HasCard(card);
         
         currentRevealCard = Instantiate(cardPrefab, revealParent);
+        currentRevealCard.transform.localScale = Vector3.one * localCardScale;
         CardDisplay display = currentRevealCard.GetComponent<CardDisplay>();
 
         display.SetCard(pulledCards[revealIndex], isNew);
@@ -116,6 +118,7 @@ public class CardOpeningUI : MonoBehaviour {
             bool isNew = !CardInventoryController.instance.HasCard(card);
 
             GameObject cardObj = Instantiate(cardPrefab, allCardsParent);
+            cardObj.transform.localScale = Vector3.one * localCardScale;
             CardDisplay display = cardObj.GetComponent<CardDisplay>();
 
             display.SetCard(pulledCards[i], isNew);

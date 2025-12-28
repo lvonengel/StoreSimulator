@@ -27,4 +27,12 @@ public class UserControlUI : MonoBehaviour {
         }
     }
 
+    public void HideAllControls() {
+        nothingInHandControls.SetActive(false);
+        stockInHandControls.SetActive(false);
+        boxInHandControls.SetActive(false);
+        furnitureControls.SetActive(false);
+        openingPackControls.SetActive(false);
+    }
+
 }

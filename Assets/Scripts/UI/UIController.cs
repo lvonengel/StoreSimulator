@@ -32,6 +32,8 @@ public class UIController : MonoBehaviour {
     private void Update() {
         if (Keyboard.current.tabKey.wasPressedThisFrame) {
             OpenClosePhone();
+            UserControlUI.instance.HideAllControls();
+            StoreStatCanvasUI.instance.ShowHideDayStats();
         }
         if (Keyboard.current.escapeKey.wasPressedThisFrame) {
             PauseUnpause();
