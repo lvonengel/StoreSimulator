@@ -27,7 +27,7 @@ public class AchievementScreenFrameTemplate : MonoBehaviour {
         this.info = info;
         cardPackText.text = info.packName;
         List<CardInventoryController.CardInventoryEntry> currentCardsInPack = CardInventoryController.instance.GetCurrentCardsInPack(info);
-        collectedText.text = $"{(float)currentCardsInPack.Count / info.possibleCardsList.Count * 100}%";
+        collectedText.text = $"{Mathf.Ceil((float)currentCardsInPack.Count / info.possibleCardsList.Count * 100)}%";
     }
 
     /// <summary>
