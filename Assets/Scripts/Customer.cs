@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -26,12 +28,21 @@ public class Customer : MonoBehaviour {
     [SerializeField] private GameObject shoppingBag;
     private bool hasGrabbed;
     [SerializeField] private float waitAfterGrabbing = .5f;
+    [SerializeField] private TMP_Text talkText;
 
     private List<StockObject> stockInBag = new List<StockObject>();
+    private float talkTextDuration = 3f;
 
     private Vector3 queuePoint;
 
+    string[] complaints = {
+        "This is way too expensive!",
+        "No way I'm paying that.",
+        "Are they serious with this price?"
+    };
+
     private void Start() {
+        talkText.gameObject.SetActive(false);
         points.Clear();
         points.AddRange(CustomerManager.instance.GetEntryPoints());
 
@@ -179,10 +190,26 @@ public class Customer : MonoBehaviour {
         hasGrabbed = true;
 
         int shelf = Random.Range(0, currentShelfCase.shelves.Count);
-
         StockObject stock = currentShelfCase.shelves[shelf].GetStock();
 
         if (stock != null) {
+
+            float basePrice = stock.info.price;
+            float currentPrice = stock.info.currentPrice;
+
+            if (currentPrice > basePrice * 3f) {
+                
+                ShowMessage(complaints[Random.Range(0, complaints.Length)]);
+
+                points.Clear();
+                points.Add(new NavPoint());
+                points[0].point = currentShelfCase.standPoint;
+                points[0].waitTime = waitAfterGrabbing * Random.Range(.75f, 1.25f);
+                currentWaitTime = points[0].waitTime;
+
+                return;
+            }
+
             stock.transform.SetParent(shoppingBag.transform);
             stockInBag.Add(stock);
             stock.PlaceInBag();
@@ -196,6 +223,7 @@ public class Customer : MonoBehaviour {
             currentWaitTime = points[0].waitTime;
         }  
     }
+
 
     /// <summary>
     /// Updates the customers line in queue. 
@@ -218,6 +246,19 @@ public class Customer : MonoBehaviour {
 
         return total;
     }
+
+    private void ShowMessage(string message) { 
+        StopAllCoroutines(); 
+        StartCoroutine(ShowMessageCo(message)); 
+    } 
+    
+    private IEnumerator ShowMessageCo(string message) { 
+        talkText.text = message;
+        talkText.gameObject.SetActive(true);
+        
+        yield return new WaitForSeconds(talkTextDuration); 
+        talkText.gameObject.SetActive(false); }
+
 }
 
 /// <summary>

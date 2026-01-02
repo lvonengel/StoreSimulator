@@ -18176,7 +18176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
       propertyPath: cardPackInfo.Array.data[1].price
-      value: 5
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
       propertyPath: cardPackInfo.Array.data[0].cardPack
@@ -18186,6 +18186,34 @@ PrefabInstance:
       propertyPath: cardPackInfo.Array.data[1].cardPack
       value: 
       objectReference: {fileID: 11400000, guid: 96b051c53e767f348aa852c26dc470ed, type: 2}
+    - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
+      propertyPath: foodInfo.Array.data[0].priceToBuyBox
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
+      propertyPath: foodInfo.Array.data[1].priceToBuyBox
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
+      propertyPath: foodInfo.Array.data[2].priceToBuyBox
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
+      propertyPath: foodInfo.Array.data[3].priceToBuyBox
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
+      propertyPath: foodInfo.Array.data[4].priceToBuyBox
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
+      propertyPath: foodInfo.Array.data[5].priceToBuyBox
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
+      propertyPath: foodInfo.Array.data[6].priceToBuyBox
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
       propertyPath: cardPackInfo.Array.data[0].stockObject
       value: 
@@ -18205,6 +18233,14 @@ PrefabInstance:
     - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
       propertyPath: cardPackInfo.Array.data[0].currentPrice
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
+      propertyPath: cardPackInfo.Array.data[0].priceToBuyBox
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
+      propertyPath: cardPackInfo.Array.data[1].priceToBuyBox
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6211453350909155108, guid: 6e8e1451bda685b4ba83822d35945b52, type: 3}
       propertyPath: foodInfo.Array.data[3].requiredStoreLevel
