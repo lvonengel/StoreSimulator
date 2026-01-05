@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -7,12 +8,15 @@ using UnityEngine.UI;
 /// </summary>
 public class PhoneScreenUI : MonoBehaviour {
 
+    private const string BATTLE_CARDS_MAIN_MENU = "BattleCardMainMenu";
+
     public static PhoneScreenUI instance {get; private set;}
 
     [SerializeField] private GameObject screen;
     [SerializeField] private TMP_Text timeText;
     public GameObject buyStockScreen, buyFurnitureScreen, buyAdvertisementScreen, upgradeStoreSpaceScreen;
     [SerializeField] private Button buyStockButton, buyFurnitureButton, buyAdvertisementButton, buyUpgradeStoreSpaceButton;
+    [SerializeField] private Button playBattleCardsButton;
     [SerializeField] private Button homeButton;
 
     [SerializeField] private Transform furnitureTemplate;
@@ -47,6 +51,9 @@ public class PhoneScreenUI : MonoBehaviour {
         buyUpgradeStoreSpaceButton.onClick.AddListener(() => {
             screen.SetActive(true);
             upgradeStoreSpaceScreen.SetActive(true);
+        });
+        playBattleCardsButton.onClick.AddListener(() => {
+            SceneManager.LoadScene(BATTLE_CARDS_MAIN_MENU);
         });
     }
 
