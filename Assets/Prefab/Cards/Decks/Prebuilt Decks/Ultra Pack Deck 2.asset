@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07bb200e7254f640bb3644d31b21014, type: 3}
+  m_Name: Ultra Pack Deck 2
+  m_EditorClassIdentifier: Assembly-CSharp::DeckData
+  deckName: Ultra Pack Deck 2
+  deckIcon: {fileID: 21300000, guid: 8ed691ff58d617045ae786cbd4611c6e, type: 3}
+  cards:
+  - {fileID: 11400000, guid: b65a323ca794bb34aa007cd001eb72ea, type: 2}
+  - {fileID: 11400000, guid: 857b2336ce026244ba9cba97616cbdb7, type: 2}
+  - {fileID: 11400000, guid: b65a323ca794bb34aa007cd001eb72ea, type: 2}
+  - {fileID: 11400000, guid: 857b2336ce026244ba9cba97616cbdb7, type: 2}
+  - {fileID: 11400000, guid: f97ec7fa6fca62c4fa5638dbbdf55ea1, type: 2}
+  - {fileID: 11400000, guid: e472cf5605794a64c9d336a2bc1b6bea, type: 2}
+  - {fileID: 11400000, guid: c6fba130df22b7c47a6e223cbaf7f36b, type: 2}
+  - {fileID: 11400000, guid: c6fba130df22b7c47a6e223cbaf7f36b, type: 2}
+  - {fileID: 11400000, guid: 4b7611c637d8ba0418fcb80f393ce07a, type: 2}
+  - {fileID: 11400000, guid: 4b7611c637d8ba0418fcb80f393ce07a, type: 2}
+  - {fileID: 11400000, guid: 8fd6ed10696f61e49b65e5d69c9a9e83, type: 2}
+  - {fileID: 11400000, guid: 2090040cae98dad4d9fec1b7843c81c8, type: 2}
+  - {fileID: 11400000, guid: 59db9a3788683494db04a9f277580680, type: 2}
+  - {fileID: 11400000, guid: ed770c9272144b544a39466b8cba01b6, type: 2}
+  - {fileID: 11400000, guid: acf778557ab54c24b8e67b0d8c965f4d, type: 2}
+  - {fileID: 11400000, guid: 2090040cae98dad4d9fec1b7843c81c8, type: 2}
+  - {fileID: 11400000, guid: e80ab80d673a38a4fb768f8db620f1b4, type: 2}
+  - {fileID: 11400000, guid: 9be18e7eacc0a44419759024b0c0102c, type: 2}
+  - {fileID: 11400000, guid: e0c873de991f9d440b2ad67c4852aab1, type: 2}
+  - {fileID: 11400000, guid: e0c873de991f9d440b2ad67c4852aab1, type: 2}
+  deckType: 0
+  MaxCards: 20

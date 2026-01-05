@@ -3248,7 +3248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd746380f48ca240beb837f5a382002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeckController
-  isTesting: 1
+  isTesting: 0
   testingPack: {fileID: 11400000, guid: fe52fb68f2aca044daa8dba6a904b0e7, type: 2}
   cardToSpawn: {fileID: -4342941749050936357, guid: 718667f9b7838054a8d13781b3e44c54, type: 3}
 --- !u!1 &814872377

@@ -14,7 +14,7 @@ public class CardDisplay : MonoBehaviour {
     [SerializeField] private Image characterArt;
     [SerializeField] private Image bgArt;
 
-    private CardInfo cardInfo;
+    public CardInfo cardInfo;
 
     private void Awake() {
         newCardVisual.SetActive(false);

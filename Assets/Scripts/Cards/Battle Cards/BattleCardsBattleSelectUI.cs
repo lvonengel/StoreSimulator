@@ -4,14 +4,16 @@ using UnityEngine.UI;
 
 public class BattleCardsBattleSelectUI : MonoBehaviour {
     
-    [SerializeField] private Button battle1Button;
-    private const string BATTLE1_SCENE = "Battle1";
-    private const string BATTLE2_SCENE = "Battle2";
-    private const string BATTLE3_SCENE = "Battle3";
+    [SerializeField] private Button battle1Button, manageDeckButton;
+    private const string BATTLE_SCENE = "Battle";
+    private const string DECK_MANAGER_SCENE = "BattleCardDeckManager";
 
     private void Awake() {
         battle1Button.onClick.AddListener(() => {
-            SceneManager.LoadScene(BATTLE1_SCENE);
+            SceneManager.LoadScene(BATTLE_SCENE);
+        });
+        manageDeckButton.onClick.AddListener(() => {
+            SceneManager.LoadScene(DECK_MANAGER_SCENE);
         });
     }
 
