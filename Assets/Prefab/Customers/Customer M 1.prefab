@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4344273817864961}
   - component: {fileID: 1608374066118781324}
+  - component: {fileID: 7299224969840485587}
   m_Layer: 0
   m_Name: Customer M 1
   m_TagString: Untagged
@@ -56,6 +57,28 @@ MonoBehaviour:
   shoppingBag: {fileID: 5106362480415292914}
   waitAfterGrabbing: 0.5
   talkText: {fileID: 298728587318314235}
+--- !u!195 &7299224969840485587
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257300293552501174}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.3
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 160
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 0
 --- !u!1 &1399725856236385497
 GameObject:
   m_ObjectHideFlags: 0

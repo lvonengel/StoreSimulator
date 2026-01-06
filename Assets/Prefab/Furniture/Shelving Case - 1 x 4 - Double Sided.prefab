@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8676032891953030701}
   - component: {fileID: 6321825749021043402}
   - component: {fileID: 4805489196260975191}
+  - component: {fileID: 8332702980832393092}
   m_Layer: 10
   m_Name: Shelving Case - 1 x 4 - Double Sided
   m_TagString: Untagged
@@ -74,8 +75,6 @@ MonoBehaviour:
   mainObject: {fileID: 8492101247078041551}
   placingObject: {fileID: 4130085352077556750}
   col: {fileID: 8676032891953030701}
-  furnitureName: Double Sided Shelving Case - 1 x 4
-  price: 500
   standPoint: {fileID: 2179632205363466525}
   shelves:
   - {fileID: 2885626810496281952}
@@ -102,8 +101,6 @@ MonoBehaviour:
   mainObject: {fileID: 8492101247078041551}
   placingObject: {fileID: 4130085352077556750}
   col: {fileID: 8676032891953030701}
-  furnitureName: 
-  price: 500
   standPoint: {fileID: 48716751251532601}
   shelves:
   - {fileID: 2515354264807595567}
@@ -115,6 +112,22 @@ MonoBehaviour:
     m_Bits: 1024
   placingModel: {fileID: 507393603158235633}
   gridSize: 0.25
+--- !u!208 &8332702980832393092
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2593470455613707391}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.65, y: 0.5, z: 0.65}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4130085352077556750
 GameObject:
   m_ObjectHideFlags: 0

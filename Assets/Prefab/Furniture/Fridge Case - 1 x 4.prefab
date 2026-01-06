@@ -508,6 +508,7 @@ GameObject:
   - component: {fileID: 4732984264197642314}
   - component: {fileID: 6310033408742661056}
   - component: {fileID: 4498010612215986845}
+  - component: {fileID: 1338256286750695574}
   m_Layer: 10
   m_Name: Fridge Case - 1 x 4
   m_TagString: Untagged
@@ -569,8 +570,6 @@ MonoBehaviour:
   mainObject: {fileID: 6608567731047658491}
   placingObject: {fileID: 112118373848671863}
   col: {fileID: 6310033408742661056}
-  furnitureName: Fridge Case - 1 x 4
-  price: 250
   standPoint: {fileID: 7842883683094045691}
   shelves:
   - {fileID: 6843811655472012803}
@@ -582,6 +581,22 @@ MonoBehaviour:
     m_Bits: 1024
   placingModel: {fileID: 7266633806389443946}
   gridSize: 0.25
+--- !u!208 &1338256286750695574
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637455205578839632}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.65, y: 0.5, z: 0.65}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2824762831388347889
 GameObject:
   m_ObjectHideFlags: 0

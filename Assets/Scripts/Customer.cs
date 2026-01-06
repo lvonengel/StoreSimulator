@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// Manages the customer details including their states of shopping,
@@ -34,6 +35,9 @@ public class Customer : MonoBehaviour {
     private float talkTextDuration = 3f;
 
     private Vector3 queuePoint;
+    private NavMeshAgent agent;
+    private Vector3 lastDestination;
+
 
     string[] complaints = {
         "This is way too expensive!",
@@ -41,15 +45,29 @@ public class Customer : MonoBehaviour {
         "Are they serious with this price?"
     };
 
+    private void Awake() {
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed;
+    }
+
     private void Start() {
         talkText.gameObject.SetActive(false);
         points.Clear();
         points.AddRange(CustomerManager.instance.GetEntryPoints());
 
         if (points.Count > 0) {
-            transform.position = points[0].point.position;
+            Vector3 spawnPos = points[0].point.position;
+
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(spawnPos, out hit, 2f, NavMesh.AllAreas)) {
+                agent.Warp(hit.position);
+            } else {
+                Debug.LogError("Customer spawned off NavMesh");
+            }
+
             currentWaitTime = points[0].waitTime;
         }
+
 
     }
 
@@ -98,12 +116,9 @@ public class Customer : MonoBehaviour {
                 break;
                 
             case CustomerState.queuing:
-                transform.position = Vector3.MoveTowards(transform.position, queuePoint, moveSpeed * Time.deltaTime);
-                if (Vector3.Distance(transform.position, queuePoint) > .1f) {
-                    anim.SetBool("isMoving", true);
-                } else {
-                    anim.SetBool("isMoving", false);
-                }
+                agent.SetDestination(queuePoint);
+                anim.SetBool("isMoving", agent.velocity.magnitude > 0.1f);
+
                 break;
 
             case CustomerState.atCheckout:
@@ -120,31 +135,44 @@ public class Customer : MonoBehaviour {
     }
 
     /// <summary>
-    /// Moves the customer to a certain point. This functions helps move
-    /// the customer to/from the store.
+    /// Moves the customer to a certain point.
     /// </summary>
     public void MoveToPoint() {
-        if (points.Count > 0) {
-
-            bool isMoving = true;
-            Vector3 targetPosition = new Vector3(points[0].point.position.x, transform.position.y, points[0].point.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-            transform.LookAt(targetPosition);
-
-            if (Vector3.Distance(transform.position, targetPosition) < .25f) {
-                isMoving = false;
-                currentWaitTime -= Time.deltaTime;
-                if (currentWaitTime <= 0) {
-                    StartNextPoint();
-                }
-            }
-
-            anim.SetBool("isMoving", isMoving);
-        } else {
+        if (points.Count == 0) {
             StartNextPoint();
+            return;
+        }
+
+        Vector3 target = points[0].point.position;
+
+        if (!agent.pathPending && lastDestination != target) {
+            agent.SetDestination(target);
+            lastDestination = target;
+        }
+
+        if (!agent.pathPending && agent.hasPath && agent.pathStatus == NavMeshPathStatus.PathInvalid) {
+            StartNextPoint();
+            return;
+        }
+
+        anim.SetBool("isMoving", agent.velocity.sqrMagnitude > 0.01f);
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance) {
+            currentWaitTime -= Time.deltaTime;
+            if (currentWaitTime <= 0f) {
+                StartNextPoint();
+            }
         }
     }
+
+
+    private bool CanReach(Vector3 target) {
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(target, path);
+        return path.status == NavMeshPathStatus.PathComplete;
+    }
+
+
 
     /// <summary>
     /// Helper to update the points that the customer has to go to.
@@ -173,14 +201,43 @@ public class Customer : MonoBehaviour {
     /// </summary>
     private void GetBrowsePoint() {
         points.Clear();
-        int selectedShelf = Random.Range(0, StoreController.instance.shelvingCases.Count);
-        points.Add(new NavPoint());
-        points[0].point = StoreController.instance.shelvingCases[selectedShelf].standPoint;
-        points[0].waitTime = browseTime * Random.Range(.75f, 1.25f);
 
-        currentWaitTime = points[0].waitTime;
-        currentShelfCase = StoreController.instance.shelvingCases[selectedShelf];
+        List<FurnitureController> shelves = StoreController.instance.shelvingCases;
+
+        if (shelves.Count == 0) {
+            StartLeaving();
+            return;
+        }
+
+        // try few times to find a reachable shelf
+        int attempts = Mathf.Min(5, shelves.Count);
+
+        for (int i = 0; i < attempts; i++) {
+            int index = Random.Range(0, shelves.Count);
+            Transform standPoint = shelves[index].standPoint;
+
+            if (CanReach(standPoint.position)) {
+                points.Add(new NavPoint {
+                    point = standPoint,
+                    waitTime = browseTime * Random.Range(.75f, 1.25f)
+                });
+
+                currentWaitTime = points[0].waitTime;
+                currentShelfCase = shelves[index];
+                return;
+            }
+        }
+
+        // if no shelves reachable
+        browsePointsRemain--;
+
+        if (browsePointsRemain > 0) {
+            GetBrowsePoint(); // try again
+        } else {
+            StartLeaving();
+        }
     }
+
 
     /// <summary>
     /// Gives an item on the shelf to the customer.
