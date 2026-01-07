@@ -7,8 +7,7 @@ public class BattleCardsMainMenuUI : MonoBehaviour {
     [SerializeField] private Button playButton, quitGameButton;
     [SerializeField] private GameObject ownedCardsWarning;
     private const string BATTLE_SCENE = "BattleCardBattleSelect";
-    private const string SHOP_SCENE = "Main Shop";
-
+    
     private float ownedCardsWarningTime = 2f;
     private float ownedCardsWarningCounter;
 
@@ -22,7 +21,7 @@ public class BattleCardsMainMenuUI : MonoBehaviour {
             }
         });
         quitGameButton.onClick.AddListener(() => {
-            SceneManager.LoadScene(SHOP_SCENE);
+            Loader.Load(Loader.Scene.MainShop);
         });
     }
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Manages how often and where the customer spawns.
@@ -23,6 +24,9 @@ public class CustomerManager : MonoBehaviour {
     }
 
     private void Update() {
+        if (SceneManager.GetActiveScene().name == "MainMenu") {
+            return;
+        }
         spawnCounter -= Time.deltaTime;
         if (spawnCounter <= 0) {
             SpawnCustomer();
@@ -34,6 +38,9 @@ public class CustomerManager : MonoBehaviour {
     }
 
     public void SpawnCustomer() {
+        if (SceneManager.GetActiveScene().name == "MainMenu") {
+            return;
+        }
         Instantiate(customersToSpawn[Random.Range(0, 16)]);
 
         spawnCounter = timeBetweenCustomers * Random.Range(.75f, 1.25f);

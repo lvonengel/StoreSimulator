@@ -12,7 +12,7 @@ public class CartScreenUI : MonoBehaviour {
     private void Awake() {
         buyCartButton.onClick.AddListener(() => {
             CartController.instance.BuyCart();
-            UIController.instance.OpenClosePhone();
+            PhoneCanvasUI.instance.ClosePhone();
             Hide();
         });
         closeButton.onClick.AddListener(() => {

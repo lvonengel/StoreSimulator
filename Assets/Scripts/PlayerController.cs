@@ -70,36 +70,36 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
-        if (UIController.instance.updatePricePanel != null) {
-            if (UIController.instance.updatePricePanel.activeSelf == true) {
+        if (PhoneCanvasUI.instance.updatePricePanel != null) {
+            if (PhoneCanvasUI.instance.updatePricePanel.activeSelf == true) {
                 return;
             }
         }
 
-        if (UIController.instance.buyStockScreen != null) {
-            if (UIController.instance.buyStockScreen.activeSelf == true) {
+        if (PhoneCanvasUI.instance.buyStockScreen != null) {
+            if (PhoneCanvasUI.instance.buyStockScreen.activeSelf == true) {
                 return;
             }
         }
-        if (UIController.instance.buyFurnitureScreen != null) {
-            if (UIController.instance.buyFurnitureScreen.activeSelf == true) {
-                return;
-            }
-        }
-
-        if (UIController.instance.pauseScreen != null) {
-            if (UIController.instance.pauseScreen.activeSelf == true) {
-                return;
-            }
-        }
-        if (UIController.instance.phoneScreen != null) {
-            if (UIController.instance.phoneScreen.activeSelf == true) {
+        if (PhoneCanvasUI.instance.buyFurnitureScreen != null) {
+            if (PhoneCanvasUI.instance.buyFurnitureScreen.activeSelf == true) {
                 return;
             }
         }
 
-        if (UIController.instance.endOfDayScreen != null) {
-            if (UIController.instance.endOfDayScreen.activeSelf == true) {
+        if (PauseScreenUI.instance.pauseScreen != null) {
+            if (PauseScreenUI.instance.pauseScreen.activeSelf == true) {
+                return;
+            }
+        }
+        if (PhoneCanvasUI.instance.phoneScreen != null) {
+            if (PhoneCanvasUI.instance.phoneScreen.activeSelf == true) {
+                return;
+            }
+        }
+
+        if (PhoneCanvasUI.instance.endOfDayScreen != null) {
+            if (PhoneCanvasUI.instance.endOfDayScreen.activeSelf == true) {
                 return;
             }
         }

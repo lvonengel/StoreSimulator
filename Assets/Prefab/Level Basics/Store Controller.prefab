@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc00190594790744689fdaf7de717d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMoney: 1000
+  currentMoney: 6000
   stockSpawnPoint: {fileID: 3019014074430219003}
   furnitureSpawnPoint: {fileID: 13154420443666340}
+  shelvingCases: []
 --- !u!1 &6368712488494778036
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +75,7 @@ Transform:
   m_GameObject: {fileID: 6368712488494778036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.1, y: 0.97, z: 2.96}
+  m_LocalPosition: {x: -1.75, y: 0.97, z: -11.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -105,7 +106,7 @@ Transform:
   m_GameObject: {fileID: 8018826659656697319}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.26, y: 0, z: 3.59}
+  m_LocalPosition: {x: -4.42, y: 0, z: -10.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

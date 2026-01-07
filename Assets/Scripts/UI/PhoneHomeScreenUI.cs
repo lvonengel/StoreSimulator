@@ -6,16 +6,17 @@ using UnityEngine.UI;
 /// <summary>
 /// Manages opening apps on the home screen of the phone.
 /// </summary>
-public class PhoneScreenUI : MonoBehaviour {
+public class PhoneHomeScreenUI : MonoBehaviour {
 
     private const string BATTLE_CARDS_MAIN_MENU = "BattleCardMainMenu";
 
-    public static PhoneScreenUI instance {get; private set;}
+    public static PhoneHomeScreenUI instance {get; private set;}
 
     [SerializeField] private GameObject screen;
     [SerializeField] private TMP_Text timeText;
-    public GameObject buyStockScreen, buyFurnitureScreen, buyAdvertisementScreen, upgradeStoreSpaceScreen;
+    public GameObject buyStockScreen, buyFurnitureScreen, buyAdvertisementScreen, upgradeStoreSpaceScreen, settingsScreen;
     [SerializeField] private Button buyStockButton, buyFurnitureButton, buyAdvertisementButton, buyUpgradeStoreSpaceButton;
+    [SerializeField] private Button settingsButton;
     [SerializeField] private Button playBattleCardsButton;
     [SerializeField] private Button homeButton;
 
@@ -55,6 +56,10 @@ public class PhoneScreenUI : MonoBehaviour {
         playBattleCardsButton.onClick.AddListener(() => {
             SceneManager.LoadScene(BATTLE_CARDS_MAIN_MENU);
         });
+        settingsButton.onClick.AddListener(() => {
+            screen.SetActive(true);
+            settingsScreen.SetActive(true);
+        });
     }
 
     private void OnEnable() {
@@ -84,6 +89,7 @@ public class PhoneScreenUI : MonoBehaviour {
         buyFurnitureScreen.SetActive(false);
         buyAdvertisementScreen.SetActive(false);
         upgradeStoreSpaceScreen.SetActive(false);
+        settingsScreen.SetActive(false);
     }
 
     

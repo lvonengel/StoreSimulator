@@ -25,21 +25,23 @@ public class SaveManager : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.P)) {
             SaveGame();
-            Debug.Log("SAVED");
         }
 
         if (Input.GetKeyDown(KeyCode.O)) {
             LoadGame(currentSlot);
-            Debug.Log("LOADED");
         }
 
         if (Input.GetKeyDown(KeyCode.L)) {
             DeleteAllSaves();
-            Debug.Log("ALL SAVES CLEARED");
         }
     }
+
     private string GetSavePath(SaveSlot slot) {
         return Application.persistentDataPath + $"/save_{slot}.json";
+    }
+
+    public void SetCurrentSaveSlot(SaveSlot slot) {
+        currentSlot = slot;
     }
 
     public void SaveGame() {
@@ -47,12 +49,27 @@ public class SaveManager : MonoBehaviour {
         string json = JsonConvert.SerializeObject(data, Formatting.Indented);
 
         File.WriteAllText(GetSavePath(currentSlot), json);
+        Debug.Log("Saved");
     }
 
-    public bool LoadGame(SaveSlot slot) {
+    public void StartGame(SaveSlot slot) {
+        SetCurrentSaveSlot(slot);
+        Loader.Load(Loader.Scene.MainShop);
+
+        StartCoroutine(LoadGameCo());
+        
+    }
+
+    IEnumerator LoadGameCo() {
+        yield return new WaitForSeconds(.15f);
+        LoadGame(currentSlot);
+    }
+
+    public void LoadGame(SaveSlot slot) {
         string path = GetSavePath(slot);
         if (!File.Exists(path)) {
-            return false;
+            Debug.Log("File does not exist");
+            return;
         }
 
         string json = File.ReadAllText(path);
@@ -60,18 +77,28 @@ public class SaveManager : MonoBehaviour {
 
         ApplySaveDataToGame(data);
         currentSlot = slot;
-        return true;
+        Debug.Log($"Loaded {currentSlot}");
     }
 
     public void DeleteAllSaves() {
         foreach (SaveSlot slot in System.Enum.GetValues(typeof(SaveSlot))) {
-            string path = GetSavePath(slot);
-
-            if (File.Exists(path)) {
-                File.Delete(path);
-                Debug.Log($"Deleted save file: {path}");
-            }
+            DeleteSave(slot);
         }
+    }
+
+    public void DeleteSave(SaveSlot slot) {
+        string path = GetSavePath(slot);
+
+        if (File.Exists(path)) {
+            File.Delete(path);
+            Debug.Log($"Deleted save file: {path}");
+        }
+    }
+
+    public bool IsSavePathExist(SaveSlot slot) {
+        string path = GetSavePath(slot);
+
+        return File.Exists(path);
     }
 
     private SaveData BuildSaveDataFromGame() {

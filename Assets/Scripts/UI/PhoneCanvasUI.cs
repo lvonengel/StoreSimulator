@@ -6,19 +6,16 @@ using UnityEngine.UI;
 /// <summary>
 /// Controls all UI including the price panel, buy screen, and pause screen.
 /// </summary>
-public class UIController : MonoBehaviour {
-    public static UIController instance {get; private set;}
+public class PhoneCanvasUI : MonoBehaviour {
+    public static PhoneCanvasUI instance {get; private set;}
 
     public GameObject updatePricePanel;
 
     [SerializeField] private Button closeFurnitureScreenButton;
 
-    public GameObject buyStockScreen;
-    public GameObject buyFurnitureScreen;
+    public GameObject buyStockScreen, buyFurnitureScreen;
 
-    public GameObject pauseScreen;
-    public GameObject phoneScreen;
-    public GameObject endOfDayScreen;
+    public GameObject phoneScreen, endOfDayScreen;
 
 
     private void Awake() {
@@ -35,9 +32,6 @@ public class UIController : MonoBehaviour {
             UserControlUI.instance.HideAllControls();
             StoreStatCanvasUI.instance.ShowHideDayStats();
         }
-        if (Keyboard.current.escapeKey.wasPressedThisFrame) {
-            PauseUnpause();
-        }
     }
 
     public void OpenUpdatePrice(StockInfo stockToUpdate) {
@@ -50,23 +44,14 @@ public class UIController : MonoBehaviour {
             phoneScreen.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
         } else {
-            phoneScreen.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            PhoneScreenUI.instance.CloseAllPhoneApps(); 
+            ClosePhone();
         }
     }
 
-    public void PauseUnpause() {
-        if (pauseScreen.activeSelf == false) {
-            pauseScreen.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0f;
-
-        } else {
-            pauseScreen.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Time.timeScale = 1f;
-        }
+    public void ClosePhone() {
+        phoneScreen.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        PhoneHomeScreenUI.instance.CloseAllPhoneApps(); 
     }
 
 }

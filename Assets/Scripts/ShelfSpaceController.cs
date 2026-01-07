@@ -120,7 +120,7 @@ public class ShelfSpaceController : MonoBehaviour {
 
     public void StartPriceUpdate() {
         if(objectsOnShelf.Count > 0) {
-            UIController.instance.OpenUpdatePrice(info);
+            PhoneCanvasUI.instance.OpenUpdatePrice(info);
         }
     }
 
