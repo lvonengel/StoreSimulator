@@ -38,10 +38,10 @@ public class StoreController : MonoBehaviour {
 
     private void Update() {
         if (Keyboard.current.iKey.wasPressedThisFrame) {
-            AddMoney(2000f);
+            AddMoney(1000f);
         }
 
-        if (Keyboard.current.oKey.wasPressedThisFrame) {
+        if (Keyboard.current.uKey.wasPressedThisFrame) {
             if (CheckMoneyAvailable(250f)) {
                 SpendMoney(250f);
             }
@@ -99,9 +99,41 @@ public class StoreController : MonoBehaviour {
         });
     }
 
+    public void LoadMoneyAndLevel(float money, int level, int experience) {
+        currentMoney = money;
+        storeLevel = level;
+        currentExperience = experience;
+
+        StoreStatsUI.instance.UpdateMoney(currentMoney);
+        StoreStatsUI.instance.UpdateStoreLevel(storeLevel);
+
+        int expToNext = GetExperienceRequiredForNextLevel();
+        float normalized = 0f;
+        if (expToNext > 0) {
+            normalized = (float)currentExperience / expToNext;
+        }
+
+
+        OnExperienceChanged?.Invoke(this, new OnExperienceChangedEventArgs {
+            experienceNormalized = normalized
+        });
+
+        OnStoreLevelChanged?.Invoke(storeLevel);
+    }
+
+
 
     public int GetStoreLevel() {
         return storeLevel;
     }
+
+    public float GetCurrentMoney() {
+        return currentMoney;
+    }
+
+    public int GetCurrentExperience() {
+        return currentExperience;
+    }
+
     
 }

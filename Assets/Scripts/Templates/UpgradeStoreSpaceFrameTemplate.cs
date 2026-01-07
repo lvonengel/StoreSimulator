@@ -24,7 +24,7 @@ public class UpgradeStoreSpaceFrameTemplate : MonoBehaviour {
     public void UpdateFrameInfo(UpgradeStoreSpaceInfo storeSpace) {
         this.storeSpace = storeSpace;
 
-        nameText.text = storeSpace.name;
+        nameText.text = storeSpace.storeSpaceName;
         priceText.text = "Price: $" + storeSpace.price.ToString("F2");
 
         // already purchased it

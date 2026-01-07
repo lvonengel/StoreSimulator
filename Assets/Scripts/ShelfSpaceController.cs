@@ -130,4 +130,70 @@ public class ShelfSpaceController : MonoBehaviour {
             shelfLabel.text = "$" + info.currentPrice.ToString("F2");
         }
     }
+
+    public bool HasStock() {
+        return objectsOnShelf.Count > 0;
+    }
+
+    public int GetStockCount() {
+        return objectsOnShelf.Count;
+    }
+
+    public string GetStockName() {
+        if (info != null) {
+            return info.name;
+        } else {
+            return string.Empty;
+        }
+    }
+
+
+    public void LoadStock(StockInfo stockInfo, int quantity) {
+        for (int i = objectsOnShelf.Count - 1; i >= 0; i--) {
+            Destroy(objectsOnShelf[i].gameObject);
+        }
+
+        objectsOnShelf.Clear();
+        info = null;
+        shelfLabel.text = string.Empty;
+
+        for (int i = 0; i < quantity; i++) {
+            LoadStockAtPoint(stockInfo);
+        }
+    }
+
+    private Transform GetPlacementPointForIndex(int index) {
+        switch (info.typeOfStock) {
+            case StockInfo.StockType.cardPack:
+                return cardPackPoints[index];
+            case StockInfo.StockType.bigDrink:
+                return bigDrinkPoints[index];
+            case StockInfo.StockType.cereal:
+                return cerealPoints[index];
+            case StockInfo.StockType.chipsTube:
+                return tubeChipsPoints[index];
+            case StockInfo.StockType.fruit:
+                return fruitPoints[index];
+            case StockInfo.StockType.fruitLarge:
+                return largeFruitPoints[index];
+        }
+        return null;
+    }
+
+    public void LoadStockAtPoint(StockInfo stockInfo) {
+        if (objectsOnShelf.Count == 0) {
+            info = stockInfo;
+        }
+
+        Transform point = GetPlacementPointForIndex(objectsOnShelf.Count);
+        if (point == null) return;
+
+        StockObject obj = Instantiate(stockInfo.stockObject, point);
+        obj.MakePlaced();
+
+        objectsOnShelf.Add(obj);
+    }
+
+
+
 }

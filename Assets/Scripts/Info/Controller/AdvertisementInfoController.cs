@@ -28,4 +28,46 @@ public class AdvertisementInfoController : MonoBehaviour {
         frames.Clear();
     }
 
+    public List<string> GetPurchasedAdvertisements() {
+        List<string> purchased = new();
+
+        foreach (AdvertisementInfo ad in advertisementInfo) {
+            if (ad.isPurchased) {
+                purchased.Add(ad.advertisementName);
+            }
+        }
+
+        return purchased;
+    }
+
+    public void LoadPurchasedAdvertisements(List<string> purchasedNames) {
+        if (purchasedNames == null) {
+            return;
+        }
+
+        foreach (AdvertisementInfo ad in advertisementInfo) {
+            ad.isPurchased = purchasedNames.Contains(ad.advertisementName);
+        }
+
+        ApplyActiveAdvertisement();
+        RefreshAllFrames();
+    }
+
+    private void ApplyActiveAdvertisement() {
+        AdvertisementInfo activeAd = null;
+
+        foreach (AdvertisementInfo ad in advertisementInfo) {
+            if (ad.isPurchased) {
+                activeAd = ad;
+            }
+        }
+
+        if (activeAd != null) {
+            CustomerManager.instance
+                .SetTimeBetweenCustomers(activeAd.timeBetweenCustomers);
+        }
+    }
+
+
+
 }

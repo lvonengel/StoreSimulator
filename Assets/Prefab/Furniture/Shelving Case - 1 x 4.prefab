@@ -115,6 +115,8 @@ MonoBehaviour:
     m_Bits: 1024
   placingModel: {fileID: 7266633806389443946}
   gridSize: 0.25
+  instanceId: 
+  furnitureId: shelf_1x4_single
 --- !u!208 &7642619796328841808
 NavMeshObstacle:
   m_ObjectHideFlags: 0

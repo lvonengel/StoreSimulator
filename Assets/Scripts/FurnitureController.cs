@@ -16,6 +16,10 @@ public class FurnitureController : MonoBehaviour {
     private float rotationStep = 45f;
     private float currentRotationY;
     [SerializeField] private float gridSize = .25f;
+    public string instanceId;
+    public string furnitureId;
+    public bool isPrimaryFurniture = true;
+
 
 
     private void Start() {
@@ -38,7 +42,9 @@ public class FurnitureController : MonoBehaviour {
     /// and actually placing the active furniture down.
     /// </summary>
     public void PlaceFurniture() {
-        
+         if (string.IsNullOrEmpty(instanceId)) {
+            instanceId = System.Guid.NewGuid().ToString();
+        }
         mainObject.SetActive(true);
         placingObject.SetActive(false);
         col.enabled = true;
@@ -68,6 +74,10 @@ public class FurnitureController : MonoBehaviour {
         }
 
         return false;
+    }
+
+    public bool IsPlaced() {
+        return !string.IsNullOrEmpty(instanceId);
     }
 
 

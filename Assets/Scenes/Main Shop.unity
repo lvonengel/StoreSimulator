@@ -9369,7 +9369,7 @@ MonoBehaviour:
   - {fileID: 8586574752925800469, guid: dbb05e4a2269048469156fc5a795e863, type: 3}
   - {fileID: 8586574752925800469, guid: d137c81394f41f34782e6e2f5a7db60c, type: 3}
   - {fileID: 8586574752925800469, guid: 2c9fc9bce8818984ebac57c3072797d2, type: 3}
-  timeBetweenCustomers: 5
+  timeBetweenCustomers: 40
   entryPointsLeft:
   - point: {fileID: 187633045}
     waitTime: 0
@@ -9403,6 +9403,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1495686795}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &861599949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 861599950}
+  - component: {fileID: 861599951}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &861599950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861599949}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.4352, y: 0, z: -0.88231}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &861599951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861599949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba423f8414efd2428b238004b76a219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveManager
+  currentSlot: 0
 --- !u!1 &864840189
 GameObject:
   m_ObjectHideFlags: 0
@@ -16472,21 +16517,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FurnitureInfoController
   furnitureInfo:
   - name: Shelf - 1 x 4
+    furnitureId: shelf_1x4_single
     requiredStoreLevel: 0
     typeOfStock: 0000000001000000020000000300000004000000
     price: 250
     furnitureObject: {fileID: 2637455205578839632, guid: 695fb0dd2d9ee6a45b650e529e829731, type: 3}
   - name: Double Sided Shelf - 1 x 4
+    furnitureId: shelf_1x4_double
     requiredStoreLevel: 0
     typeOfStock: 0000000001000000020000000300000004000000
     price: 500
     furnitureObject: {fileID: 2593470455613707391, guid: 2ef70a8eb43d5aa409d820d5ac108762, type: 3}
   - name: Shelf - 2 x 4
+    furnitureId: shelf_2x4_single
     requiredStoreLevel: 5
     typeOfStock: 0000000001000000020000000300000004000000
     price: 600
     furnitureObject: {fileID: 2637455205578839632, guid: b20821f0c57f78f43a4e0738e93d21f9, type: 3}
   - name: Double Sided Shelf - 2 x 4
+    furnitureId: shelf_2x4_double
     requiredStoreLevel: 5
     typeOfStock: 0000000001000000020000000300000004000000
     price: 1200
@@ -17525,6 +17574,7 @@ GameObject:
   - component: {fileID: 1683686230}
   - component: {fileID: 1683686229}
   - component: {fileID: 1683686228}
+  - component: {fileID: 1683686231}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -17624,6 +17674,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683686226}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1683686231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683686226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 6618df5b016994846ab0baba2f59b407, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1001 &1694940423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19031,7 +19113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2637455205578839632, guid: 695fb0dd2d9ee6a45b650e529e829731, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4732984264197642314, guid: 695fb0dd2d9ee6a45b650e529e829731, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20260,7 +20342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2637455205578839632, guid: 695fb0dd2d9ee6a45b650e529e829731, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4732984264197642314, guid: 695fb0dd2d9ee6a45b650e529e829731, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22358,12 +22440,13 @@ SceneRoots:
   - {fileID: 1517803899}
   - {fileID: 1122270363}
   - {fileID: 1495686795}
+  - {fileID: 861599950}
   - {fileID: 1552358770}
   - {fileID: 1694940423}
   - {fileID: 152984332}
   - {fileID: 497308192}
   - {fileID: 419674966}
-  - {fileID: 1431425449}
   - {fileID: 2042236129}
   - {fileID: 317053574}
   - {fileID: 1022119092}
+  - {fileID: 1431425449}

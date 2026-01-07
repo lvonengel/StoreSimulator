@@ -38,14 +38,53 @@ public class UpgradeStoreSpaceInfoController : MonoBehaviour {
     }
 
     public void ApplyPurchasedUpgrades() {
-    foreach (StoreSpaceUnlock unlock in storeSpaceUnlocks) {
-        if (unlock.upgrade.isPurchased && unlock.wallToDisable != null) {
+
+        foreach (StoreSpaceUnlock unlock in storeSpaceUnlocks) {
+            if (unlock.wallToDisable == null) {
+                continue;
+            }
+
             foreach (GameObject wall in unlock.wallToDisable) {
-                wall.SetActive(false);
+                wall.SetActive(true);
+            }
+        }
+
+        foreach (StoreSpaceUnlock unlock in storeSpaceUnlocks) {
+            if (unlock.upgrade.isPurchased && unlock.wallToDisable != null) {
+                foreach (GameObject wall in unlock.wallToDisable) {
+                    wall.SetActive(false);
+                }
             }
         }
     }
-}
+
+
+    public List<string> GetPurchasedStoreSpaces() {
+        List<string> purchased = new();
+
+        foreach (UpgradeStoreSpaceInfo info in storeSpaceInfo) {
+            if (info.isPurchased) {
+                purchased.Add(info.storeSpaceName);
+            }
+        }
+
+        return purchased;
+    }
+
+    public void LoadPurchasedStoreSpaces(List<string> purchasedNames) {
+        if (purchasedNames == null) {
+            return;
+        }
+
+        foreach (UpgradeStoreSpaceInfo info in storeSpaceInfo) {
+            info.isPurchased = purchasedNames.Contains(info.storeSpaceName);
+        }
+
+        ApplyPurchasedUpgrades();
+        RefreshAllFrames();
+    }
+
+
 
 
 }

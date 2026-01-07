@@ -24,7 +24,7 @@ public class BuyAdvertisementFrameTemplate : MonoBehaviour {
     public void UpdateFrameInfo(AdvertisementInfo advertisement) {
         this.advertisement = advertisement;
 
-        nameText.text = advertisement.name;
+        nameText.text = advertisement.advertisementName;
         priceText.text = "Price: $" + advertisement.price.ToString("F2");
 
         // already purchased it

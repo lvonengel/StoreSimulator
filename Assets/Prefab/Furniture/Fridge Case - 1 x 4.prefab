@@ -581,6 +581,8 @@ MonoBehaviour:
     m_Bits: 1024
   placingModel: {fileID: 7266633806389443946}
   gridSize: 0.25
+  instanceId: 
+  furnitureId: fridge_1x4
 --- !u!208 &1338256286750695574
 NavMeshObstacle:
   m_ObjectHideFlags: 0

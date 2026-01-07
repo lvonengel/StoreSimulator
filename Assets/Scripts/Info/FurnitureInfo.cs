@@ -7,6 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class FurnitureInfo {
     public string name;
+    public string furnitureId;
+
 
     public int requiredStoreLevel;
 
